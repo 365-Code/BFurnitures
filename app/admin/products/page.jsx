@@ -37,15 +37,25 @@ const Page = () => {
 
   useEffect(() => {
     const getProducts = async () => {
-      const res = await fetch(`/api/product/getproduct`, {
-        cache: 'no-store'
-      })
+      try{
 
-      const result = await res.json();
-      setProducts(result.products)
-      setDisplayProducts(result.products)
+        const res = await fetch(`/api/product/getproduct`, {
+          cache: 'no-store'
+        })
+        
+        const result = await res.json();
+        
+        if(result.success){
+          setProducts(result.products)
+          setDisplayProducts(result.products)
+        }
+      } catch (error){
+        console.log(error)
+      }
     }
     getProducts()
+
+
   }, [])
 
   const handleDelete = async () => {
@@ -316,12 +326,12 @@ const Page = () => {
           <button onClick={() => { showProduct("add") }} className='p-3 transition-all bg-[#f5f6f5a1] hover:bg-slate-400 font-semibold uppercase text-center flex justify-center w-1/2 items-center gap-2'>add product<MdAddBox size={"1.3em"} /></button>
         </div>
         {
-            displayProducts.length
+            displayProducts?.length
             ?
         <div className='grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4'>
 
             {
-            displayProducts.map((item) => {
+            displayProducts?.map((item) => {
               return (
                   <div key={item._id} className='justify-self-center custom-shadow mb-8 border rounded-t-lg overflow-hidden flex flex-col justify-between max-w-full max-h-[440px]
                           w-[300px] min-h-[350px]
