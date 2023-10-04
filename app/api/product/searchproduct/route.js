@@ -1,0 +1,55 @@
+import connectDB from "@/libs/db";
+import productModel from "@/models/productModel";
+import { NextResponse } from "next/server"
+
+export async function GET( request ){
+
+    connectDB();
+
+    const {searchParams} = new URL(request.url)
+
+    const ctg = searchParams.get('category')
+    const page = searchParams.get('page')
+    const search = searchParams.get('search')
+
+
+    let products = []
+    const lmt = 19;
+    const pages = (page-1)*lmt || 0
+    let msg = "";
+    // if(category){
+    //     products = await productModel.find({category}).sort({updatedAt: -1}).skip((page-1)*lmt).limit(lmt);
+    // } else{
+    //     products = await productModel.find().sort({updatedAt: -1});
+    // }
+
+    products = await productModel.find({
+        $or: [
+            {
+                $and: [
+                    {category : ctg},
+                    {slug : {$regex : search , $options: "i"}}
+                ]
+            }
+        ]
+     }).sort({updatedAt: -1}).skip(pages).limit(lmt)
+
+     if(!products.length){
+         products = await productModel.find({
+                slug : {$regex : search , $options: "i"}
+            }).sort({updatedAt: -1}).skip(pages).limit(lmt)
+        }
+
+     
+
+
+     msg = `Search Result For ${ctg} ${search}`
+    // if(!products.length){
+    //      products = await productModel.find({}).sort({updatedAt: -1}).skip(pages).limit(lmt)
+    //      fetched = await productModel.find({}).count();
+    //      msg = "Our Catalog"
+    // }
+
+
+    return NextResponse.json( {fetched: products.length, products, msg, success: true});
+}
