@@ -33,22 +33,17 @@ const Page = () => {
     theme: "light"
   }
 
-  // console.log(process.env.NEXT_PUBLIC_URL);
 
   useEffect(() => {
     const getProducts = async () => {
       try{
 
-        const res = await fetch(`/api/product/getproduct`, {
-          cache: 'no-store'
-        })
+        const result = await fetch(`/api/product/getproduct`)
         
-        const result = await res.json();
-        
-        if(result.success){
-          setProducts(result.products)
-          setDisplayProducts(result.products)
-        }
+        const res = await result.json();
+
+        setProducts(res.products)
+        setDisplayProducts(res.products)
       } catch (error){
         console.log(error)
       }

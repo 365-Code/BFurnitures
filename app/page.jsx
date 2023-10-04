@@ -15,22 +15,6 @@ export async function getData() {
 
     const trending = await productModel.find({tag: "trending"})  
 
-    // const res = await result.json();
-
-
-    // const items = res.products
-    // // const items = res
-
-    // console.log(items.length);
-
-
-    
-    // const featured = items.filter((item)=>{
-    //   return item.tag == "featured"
-    // })
-    // const trending = items.filter((item)=>{
-    //   return item.tag == "trending"
-    // })
 
 
     return {
