@@ -12,11 +12,11 @@ export async function GET( request ){
         const {searchParams} = new URL(request.url)
 
         const category = searchParams.get('category')
-        const page = searchParams.get('page')
+        const Page = searchParams.get('page')
 
         let products = []
         const lmt = 19;
-        const pages = ( (page-1) >=0 ? (page-1)*lmt : 0 )
+        const Pages = ( (page-1) >=0 ? (page-1)*lmt : 0 )
         if(category){
             products = await productModel
                             .find({category})

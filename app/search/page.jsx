@@ -23,7 +23,7 @@ import { toast } from 'react-toastify'
 // }
 
 
-const page = () => {
+const Page = () => {
 
   const [products, setProducts] = useState([])
   const [page, setPage] = useState(1);
@@ -170,4 +170,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

@@ -7,7 +7,7 @@ import { FaUser, FaUserPlus, FaLock } from 'react-icons/fa'
 import { MdEmail } from 'react-icons/md'
 import { toast } from 'react-toastify'
 
-const page = () => {
+const Page = () => {
 
   const router = useRouter();
 
@@ -177,4 +177,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

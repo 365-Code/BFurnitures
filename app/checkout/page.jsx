@@ -8,7 +8,7 @@ import { useCart } from '@/context/CartState'
 import CartCard from '@/components/CartCard'
 
 
-const page = () => {
+const Page = () => {
 
     const [paymentMethod, setPaymentMethod] = useState("");
 
@@ -236,4 +236,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react'
 import { BsFillHeartFill, BsBoxFill } from 'react-icons/bs'
 import { MdArrowForwardIos, MdEdit, MdEmail, MdLocationPin, MdSmartphone } from 'react-icons/md'
 
-const page = () => {
+const Page = () => {
   const [edit, setEdit] = useState('editModeOff')
   const [user, setUser] = useState(
     {
@@ -65,7 +65,7 @@ const page = () => {
                 // src="https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg?w=740&t=st=1694527348~exp=1694527948~hmac=86c5ae0d7ad78a6104a440db4d6971233e98e58a01b92304441f1e506a64bda6" alt=""
                 // src="https://img.freepik.com/premium-photo/photo-businesswoman_889227-37077.jpg?w=740"
                 src={user.avatar}
-                alt=''
+                alt='avatar'
               />
             </div>
 
@@ -148,4 +148,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

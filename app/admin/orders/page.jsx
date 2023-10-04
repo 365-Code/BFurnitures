@@ -1,7 +1,7 @@
 import AdminSideBar from '@/components/AdminSideBar'
 import React from 'react'
 
-const page = () => {
+const Page = () => {
   return (
     <div className='flex'>
         <AdminSideBar active={"orders"} />
@@ -12,4 +12,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

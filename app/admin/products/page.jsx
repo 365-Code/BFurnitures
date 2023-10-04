@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { MdAddBox, MdCancel, MdClose, MdDelete, MdEdit, MdPhotoCamera, MdSearch } from 'react-icons/md'
 import { toast } from 'react-toastify'
 
-const page = () => {
+const Page = () => {
 
   const initialProduct = {
     title: '', 
@@ -370,4 +370,4 @@ const page = () => {
     </div>
   )
 }
-export default page
+export default Page

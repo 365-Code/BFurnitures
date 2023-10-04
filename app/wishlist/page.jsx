@@ -4,7 +4,7 @@ import { useCart } from '@/context/CartState'
 import Link from 'next/link'
 import React from 'react'
 
-const page = () => {
+const Page = () => {
 
     const {wishlist} = useCart()
 
@@ -31,4 +31,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

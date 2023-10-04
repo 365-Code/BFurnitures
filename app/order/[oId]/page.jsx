@@ -8,7 +8,7 @@ import { BiLogoVisa } from 'react-icons/bi'
 import { BsBoxSeamFill, BsFillArrowUpRightCircleFill, BsTruck } from 'react-icons/bs'
 import { useParams } from 'next/navigation'
 
-const page = () => {
+const Page = () => {
 
   const {cart} = useCart();
 
@@ -143,4 +143,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

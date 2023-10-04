@@ -29,7 +29,7 @@ async function getServerSideProps(category){
 
 }
 
-const page = async () => {
+const Page = async () => {
 
   const {products} = await getServerSideProps("beds")
 
@@ -40,4 +40,4 @@ const page = async () => {
   )
 }
 
-export default page
+export default Page

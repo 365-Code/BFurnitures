@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { FaUser, FaUserPlus, FaLock } from 'react-icons/fa'
 import { toast } from 'react-toastify'
-const page = () => {
+const Page = () => {
 
 
   const router = useRouter();
@@ -141,4 +141,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

@@ -9,13 +9,13 @@ export async function GET( request ){
     const {searchParams} = new URL(request.url)
 
     const ctg = searchParams.get('category')
-    const page = searchParams.get('page')
+    const Page = searchParams.get('page')
     const search = searchParams.get('search')
 
 
     let products = []
     const lmt = 19;
-    const pages = (page-1)*lmt || 0
+    const Pages = (page-1)*lmt || 0
     let msg = "";
     // if(category){
     //     products = await productModel.find({category}).sort({updatedAt: -1}).skip((page-1)*lmt).limit(lmt);

@@ -27,7 +27,7 @@ export async function getData() {
 }
 
 
-const page = async () => {
+const Page = async () => {
 
   const { featured, trending } = await getData();
 
@@ -170,7 +170,7 @@ const page = async () => {
         <div className="sm:w-1/2 p-4 md:flex md:flex-col md:justify-center md:items-center">
           <h3 className="font-semibold text-xl text-left w-full">About Us</h3>
           <p>
-            Our furniture business is dedicated to providing high-quality and stylish pieces for every room in your home. With a focus on craftsmanship and attention to detail, we strive to exceed our customers' expectations. Our team of experienced professionals is committed to delivering exceptional customer service and ensuring your satisfaction with every purchase.
+            Our furniture business is dedicated to providing high-quality and stylish pieces for every room in your home. With a focus on craftsmanship and attention to detail, we strive to exceed our customers expectations. Our team of experienced professionals is committed to delivering exceptional customer service and ensuring your satisfaction with every purchase.
           </p>
         </div>
 
@@ -181,5 +181,5 @@ const page = async () => {
   )
 }
 
-export default page
+export default Page
 
