@@ -10,7 +10,7 @@ import { MdClose, MdFilter, MdFilter1 } from 'react-icons/md'
 import { toast } from 'react-toastify'
 // export async function getServerSideProps(page) {
 
-//   const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/product/getproduct/?page=${page}`, {
+//   const res = await fetch(`/api/product/getproduct/?page=${page}`, {
 //     cache: 'no-store'
 //   })
 
@@ -32,7 +32,7 @@ const Page = () => {
   const itm = Array(0,1,2,3,4,5,6,7,8,9)
 
   const loadProducts = async (page=1,search,category)=>{
-      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/product/searchproduct/?page=${page}&search=${search}&category=${category}`, {
+      const res = await fetch(`/api/product/searchproduct/?page=${page}&search=${search}&category=${category}`, {
         cache: 'no-store'
     })
     const response = await res.json();

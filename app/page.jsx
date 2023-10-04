@@ -8,7 +8,7 @@ export async function getData() {
   try{
 
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/product/getproduct`, {
+    const res = await fetch(`/api/product/getproduct`, {
       cache: 'no-store',
     })
 

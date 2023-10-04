@@ -32,7 +32,7 @@ const ProductPageCard = ({ slug }) => {
   useEffect(() => {
 
     const getSingleProduct = async () => {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/product/getsingleproduct/?slug=${slug}`);
+      const res = await fetch(`/api/product/getsingleproduct/?slug=${slug}`);
 
       const json = await res.json()
 

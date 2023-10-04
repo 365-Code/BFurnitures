@@ -31,7 +31,7 @@ const Page = () => {
   useEffect(()=>{
 
     const getDelivery = async ()=>{
-      const result = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/delivery?uId=${auth?.user._id}`)
+      const result = await fetch(`/api/delivery?uId=${auth?.user._id}`)
   
       const res = await result.json();
   

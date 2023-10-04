@@ -16,7 +16,7 @@ const EditProfile = ({userDet, setUserDet, setVisible}) => {
   const handleUpdate = async ()=>{
     console.log(details);
 
-    const result = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/delivery?uId=${details.uId}`, {
+    const result = await fetch(`/api/delivery?uId=${details.uId}`, {
       method: "PUT",
       body: JSON.stringify(details)
     })
