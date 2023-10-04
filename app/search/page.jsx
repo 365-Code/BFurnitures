@@ -74,11 +74,11 @@ const Page = () => {
       setProducts([...products, ...result.products]);
     }
 
-    const timeOut = setTimeout(()=>{
+    // const timeOut = setTimeout(()=>{
       getproduct(page, filter.search, filter.category);
-    }, 2000)
+    // }, 2000)
 
-    return ()=>(clearTimeout(timeOut))
+    // return ()=>(clearTimeout(timeOut))
   }, [page])
 
 

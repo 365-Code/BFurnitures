@@ -23,13 +23,20 @@ async function getServerSideProps(category){
 
   } catch (err){
     console.log("error");
+    return null
   }
 
 }
 
 const Page = async () => {
 
-  const {products} = await getServerSideProps("decors")
+  const items = await getServerSideProps("decors")
+
+  if(!items){
+    return null;
+  }
+
+  const { products } = items
 
   return (
     <div>

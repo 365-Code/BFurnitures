@@ -12,11 +12,11 @@ export async function GET( request ){
         const {searchParams} = new URL(request.url)
 
         const category = searchParams.get('category')
-        const Page = searchParams.get('page')
+        const page = searchParams.get('page')
 
         let products = []
         const lmt = 19;
-        const Pages = ( (page-1) >=0 ? (page-1)*lmt : 0 )
+        const pages = ( (page-1) >=0 ? (page-1)*lmt : 0 )
         if(category){
             products = await productModel
                             .find({category})
@@ -30,23 +30,10 @@ export async function GET( request ){
                                 .skip( pages )
                                 .limit(lmt)
                                 .sort({updatedAt: -1});
-                                
-                // products = await testModel
-                //                     .find()
-                //                     .skip( pages )
-                //                     .limit(lmt)
-                //                     .sort({updatedAt: -1});
             } else{
                 products = await productModel
                                 .find()
                                 .sort({updatedAt: -1});
-
-                
-                // products = await testModel
-                //                 .find()
-                //                 .sort({updatedAt: -1});
-
-
             }
         }
 

@@ -5,31 +5,44 @@ import Link from 'next/link';
 
 export async function getData() {
 
-  const res = await fetch('http://localhost:3000/api/product/getproduct', {
-    cache: 'no-store',
-  })
+  try{
 
-  const result = await res.json();
 
-  const items = result.products
+    const res = await fetch('http://localhost:3000/api/product/getproduct', {
+      cache: 'no-store',
+    })
 
-  const featured = items.filter((item)=>{
-    return item.tag == "featured"
-  })
-  const trending = items.filter((item)=>{
-    return item.tag == "trending"
-  })
+    const result = await res.json();
 
-  return {
-    featured,
-    trending
+    const items = result.products
+
+    const featured = items.filter((item)=>{
+      return item.tag == "featured"
+    })
+    const trending = items.filter((item)=>{
+      return item.tag == "trending"
+    })
+
+    return {
+      featured,
+      trending
+    }
+  } catch(err){
+    console.log(err)
+    return null
   }
 }
 
 
 const Page = async () => {
 
-  const { featured, trending } = await getData();
+  const items = await getData();
+
+  if(!items){
+    return null
+  }
+
+  const {featured, trending} = items
 
   return (
     <div className='w-full py-10 px-6 space-y-12'>

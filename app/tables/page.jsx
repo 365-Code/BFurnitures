@@ -9,7 +9,7 @@ async function getServerSideProps(category){
 
     connectDB();
 
-    const res = await fetch(`http://localhost:3000/api/product/getproduct/?category=${category}`, {
+    const res = await fetch(`http://localhost:3000/api/product/getproduct?category=${category}`, {
       cache: 'no-store',
     })
 
@@ -22,14 +22,20 @@ async function getServerSideProps(category){
     }
   } catch (err){
     console.log("error");
+    return null
   }
 
 }
 
 const Page = async () => {
 
-  const {products} = await getServerSideProps("tables")
+  const items = await getServerSideProps("tables")
 
+  if(!items){
+    return null;
+  }
+
+  const { products } = items
 
   return (
     <Cards title={"Tables"} items={products} />
