@@ -21,7 +21,7 @@ const Dropdown = ({title, menu, func1}) => {
     onMouseLeave={()=>(setDropDown('h-0'))}
     className={`flex ${dropdown} transition-all translate-x-0 flex-col absolute right-0 bg-slate-200 min-w-[160px] rounded-md overflow-hidden `}>
         {
-            menu.map( (menuItem, index)=>{
+            menu?.map( (menuItem, index)=>{
                 return (
                     <button key={`${menuItem.title}-${index}`} onClick={()=>{func1}} className="w-full text-left px-2 py-3 border-b hover:bg-slate-300 border-b-slate-300 text-slate-500 font-semibold"> <span className='flex gap-2 items-center'>{menuItem.icon} {menuItem.title}</span></button>
                 )

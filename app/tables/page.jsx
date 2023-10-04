@@ -4,24 +4,17 @@ import productItems from '@/utils/productItem'
 import React from 'react'
 
 async function getServerSideProps(category){
-
   try{
+    connectDB()
 
-    connectDB();
-
-    const res = await fetch(`/api/product/getproduct?category=${category}`, {
-      cache: 'no-store',
-    })
-
-    const result = await res.json();
-
-    const products = result.products
+    const products = await productModel.find({category: "table"})
 
     return {
       products
     }
+
   } catch (err){
-    console.log("error");
+    console.log(err);
     return null
   }
 
@@ -29,13 +22,14 @@ async function getServerSideProps(category){
 
 const Page = async () => {
 
-  const items = await getServerSideProps("tables")
+  const items = await getServerSideProps()
 
   if(!items){
     return null;
   }
 
-  const { products } = items
+  const { products } = JSON.parse(JSON.stringify(items))
+
 
   return (
     <Cards title={"Tables"} items={products} />

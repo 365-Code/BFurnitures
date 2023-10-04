@@ -14,10 +14,13 @@ export async function GET( request ){
         const category = searchParams.get('category')
         const page = searchParams.get('page')
 
+
         let products = []
         const lmt = 19;
         const pages = ( (page-1) >=0 ? (page-1)*lmt : 0 )
+
         if(category){
+            console.log("%cin category", "color: magenta")
             products = await productModel
                             .find({category})
                             .skip(pages)
@@ -39,10 +42,12 @@ export async function GET( request ){
 
         const fetched = products.length;
 
-        return NextResponse.json( {fetched, products, msg: "Products Fetched Successfully"});
+        console.log(`%csuccess: true, ${fetched}, ${products}, msg: "Products Fetched Successfully"`, "color: magenta");
+
+        return NextResponse.json( {success: true, fetched, products, msg: "Products Fetched Successfully"});
     } catch (err){
         console.log(err)
-        return NextResponse.json({msg: "Error Fetching Products"})
+        return NextResponse.json({success: false, msg: "Error Fetching Products"})
     }
 
 }

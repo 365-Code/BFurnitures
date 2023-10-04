@@ -152,7 +152,7 @@ const Page = () => {
           }
           {
             loading &&
-            itm.map((item, index)=>(<Skeleton key={index}/>))
+            itm?.map((item, index)=>(<Skeleton key={index}/>))
           }
         </div>
 

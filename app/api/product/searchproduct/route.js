@@ -15,7 +15,7 @@ export async function GET( request ){
 
     let products = []
     const lmt = 19;
-    const pages = (page-1)*lmt || 0
+    const pages = ( (page-1) >=0 ? (page-1)*lmt : 0 )
     let msg = "";
     // if(category){
     //     products = await productModel.find({category}).sort({updatedAt: -1}).skip((page-1)*lmt).limit(lmt);

@@ -1,27 +1,37 @@
 import React from 'react'
 import Cards from '../components/Cards'
 import Link from 'next/link';
+import productModel from '@/models/productModel';
+import connectDB from '@/libs/db';
 
 
 export async function getData() {
 
   try{
 
+    // const result = await fetch(`/api/product/getproduct`)
+    connectDB()
+    const featured = await productModel.find({tag: "featured"})
 
-    const res = await fetch(`/api/product/getproduct`, {
-      cache: 'no-store',
-    })
+    const trending = await productModel.find({tag: "trending"})  
 
-    const result = await res.json();
+    // const res = await result.json();
 
-    const items = result.products
 
-    const featured = items.filter((item)=>{
-      return item.tag == "featured"
-    })
-    const trending = items.filter((item)=>{
-      return item.tag == "trending"
-    })
+    // const items = res.products
+    // // const items = res
+
+    // console.log(items.length);
+
+
+    
+    // const featured = items.filter((item)=>{
+    //   return item.tag == "featured"
+    // })
+    // const trending = items.filter((item)=>{
+    //   return item.tag == "trending"
+    // })
+
 
     return {
       featured,
@@ -36,13 +46,16 @@ export async function getData() {
 
 const Page = async () => {
 
-  const items = await getData();
+  let {featured, trending} = await getData();
 
-  if(!items){
-    return null
-  }
+  featured = JSON.parse(JSON.stringify(featured))
+  trending = JSON.parse(JSON.stringify(trending))
 
-  const {featured, trending} = items
+  // if(!items){
+  //   return null
+  // }
+
+  // const {featured, trending} = items
 
   return (
     <div className='w-full py-10 px-6 space-y-12'>
@@ -53,14 +66,14 @@ const Page = async () => {
             className='text-xl font-semibold leading-relaxed
                       sm:text-2xl 
                       md:text-3xl'>
-            {featured[0]?.title}
+            {featured?.[0]?.title}
           </h2>
           <p>
             Welcome to our furniture store. We offer a wide range of high-quality furniture pieces that are both stylish and functional. Browse our collection and find the perfect piece for your home today.
 
           </p>
           <Link
-          href={`/products/${featured[0].slug}`}
+          href={`/products/${featured?.[0].slug}`}
           className='px-8 py-2 text-center border border-slate-400 w-48 hover:bg-slate-300 rounded-sm'>
             Shop Now
           </Link>
@@ -70,7 +83,7 @@ const Page = async () => {
           <img
             className="w-full h-full object-cover object-center" 
             // src="https://img.freepik.com/free-photo/living-room-with-couch-lamp-wall_1340-26675.jpg?t=st=1694157011~exp=1694160611~hmac=b13e100972be9de2b69c0d90a52bcb433da1ff3b7917ac3405894786ad8544fe&w=740" 
-            src={featured[0]?.image}
+            src={featured?.[0]?.image}
             alt="" />
 
         </div>
@@ -87,13 +100,13 @@ const Page = async () => {
             <img
               className="opacity-60 object-cover object-center w-full h-full" 
               // src="https://img.freepik.com/premium-photo/group-vases-with-red-yellow-pattern-number-3-front_865967-466611.jpg?w=740" 
-              src={featured[1]?.image}
+              src={featured?.[1]?.image}
               alt="" />
 
             <div className="absolute top-0 left-0 flex flex-col justify-center w-full h-full p-4 gap-1">
               <h2 className="text-2xl md:text-3xl font-bold tracking-wide">HOT DEALS</h2>
-              <p className="text-sm md:text-base font-semibold">{featured[1]?.category}</p>
-              <Link href={`/products/${featured[1]?.slug}`} className="font-light underline text-sm">SHOP NOW</Link>
+              <p className="text-sm md:text-base font-semibold">{featured?.[1]?.category}</p>
+              <Link href={`/products/${featured?.[1]?.slug}`} className="font-light underline text-sm">SHOP NOW</Link>
             </div>
 
           </div>
@@ -102,13 +115,13 @@ const Page = async () => {
             <img
               className="opacity-60 object-cover object-center w-full h-full"
               // src="https://img.freepik.com/premium-photo/hyper-detailed-shot-spa-accessories-made-from-bamboo_933496-13768.jpg?w=900" 
-              src={featured[2].image}
+              src={featured?.[2].image}
               alt="" />
 
             <div className="absolute top-0 left-0 flex flex-col justify-center w-full h-full p-4 gap-1">
               <h2 className="text-2xl md:text-3xl font-bold tracking-wide">HOT DEALS</h2>
-              <p className="text-sm md:text-base font-semibold">{featured[2]?.category}</p>
-              <Link href={`/products/${featured[2]?.slug}`} 
+              <p className="text-sm md:text-base font-semibold">{featured?.[2]?.category}</p>
+              <Link href={`/products/${featured?.[2]?.slug}`} 
               className="font-light underline text-sm">SHOP NOW</Link>
             </div>
           </div>
@@ -133,13 +146,13 @@ const Page = async () => {
 
             <img
               className="opacity-60 object-cover object-center w-full h-full" 
-              src={featured[3].image}
+              src={featured?.[3].image}
               alt="" />
 
             <div className="absolute top-0 left-0 flex flex-col justify-center w-full h-full p-4 gap-1">
               <h2 className="text-2xl md:text-3xl font-bold tracking-wide">HOT DEALS</h2>
-              <p className="text-sm md:text-base font-semibold">{featured[3].category}</p>
-              <Link href={`/products/${featured[3]?.slug}`} 
+              <p className="text-sm md:text-base font-semibold">{featured?.[3].category}</p>
+              <Link href={`/products/${featured?.[3]?.slug}`} 
               className="font-light underline text-sm">SHOP NOW</Link>
             </div>
 
@@ -148,13 +161,13 @@ const Page = async () => {
           <div className="relative sm:basis-1/2">
             <img
               className="opacity-60 object-cover object-center w-full h-full"
-              src={featured[4]?.image}
+              src={featured?.[4]?.image}
               alt="" />
 
             <div className="absolute top-0 left-0 flex flex-col justify-center w-full h-full p-4 gap-1">
               <h2 className="text-2xl md:text-3xl font-bold tracking-wide">HOT DEALS</h2>
-              <p className="text-sm md:text-base font-semibold">{featured[4]?.category}</p>
-              <Link href={`/products/${featured[4]?.slug}`} 
+              <p className="text-sm md:text-base font-semibold">{featured?.[4]?.category}</p>
+              <Link href={`/products/${featured?.[4]?.slug}`} 
               className="font-light underline text-sm">SHOP NOW</Link>
             </div>
           </div>

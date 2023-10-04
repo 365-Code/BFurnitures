@@ -1,30 +1,22 @@
 import React from 'react'
 import Cards from '../../components/Cards'
-import productItems from '../../utils/productItem'
 import connectDB from '@/libs/db';
+import productModel from '@/models/productModel';
 
 
-async function getServerSideProps(category){
+async function getServerSideProps(){
 
   try{
+    connectDB()
 
-    connectDB();
-
-    const res = await fetch(`/api/product/getproduct?category=${category}`, {
-      cache: 'no-store',
-    })
-
-    const result = await res.json();
-    
-    console.log(result)
-    const products = result.products
+    const products = await productModel.find({category: "bed"})
 
     return {
       products
     }
 
   } catch (err){
-    console.log("err");
+    console.log(err);
     return null
   }
 
@@ -32,13 +24,13 @@ async function getServerSideProps(category){
 
 const Page = async () => {
 
-  const items = await getServerSideProps("beds")
+  const items = await getServerSideProps()
 
   if(!items){
     return null;
   }
 
-  const { products } = items
+  const { products } = JSON.parse(JSON.stringify(items))
 
   return (
     <div>
