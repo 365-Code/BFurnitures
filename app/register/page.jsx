@@ -49,7 +49,7 @@ const Page = () => {
     if(userDetails.avatar)
       userDetail.append('avatar', userDetails.avatar, userDetails.avatar.name)
 
-    const data = await fetch('http://localhost:3000/api/auth/register',{
+    const data = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/auth/register`,{
       method: "POST",
       headers: {
         "Content-Type" : "application/json"

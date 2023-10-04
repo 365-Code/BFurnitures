@@ -10,7 +10,7 @@ async function getServerSideProps(category){
 
     connectDB();
 
-    const res = await fetch(`http://localhost:3000/api/product/getproduct?category=${category}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/product/getproduct?category=${category}`, {
       cache: 'no-store',
     })
 

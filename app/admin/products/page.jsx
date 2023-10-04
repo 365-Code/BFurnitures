@@ -33,9 +33,11 @@ const Page = () => {
     theme: "light"
   }
 
+  // console.log(process.env.NEXT_PUBLIC_URL);
+
   useEffect(() => {
     const getProducts = async () => {
-      const res = await fetch("http://localhost:3000/api/product/getproduct", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/product/getproduct`, {
         cache: 'no-store'
       })
 
@@ -49,7 +51,7 @@ const Page = () => {
   const handleDelete = async () => {
 
     const pId = delStatus.item.id
-    const result = await fetch(`http://localhost:3000/api/product/deleteproduct/?pId=${pId}`, {
+    const result = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/product/deleteproduct/?pId=${pId}`, {
       method: "DELETE"
     })
 
@@ -89,7 +91,7 @@ const Page = () => {
     formData.append('stock', product.stock)
 
     if (updStatus.tag == "add") {
-      const result = await fetch("http://localhost:3000/api/product/addproduct", {
+      const result = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/product/addproduct`, {
         method: "POST",
         // headers: {
         //   "Content-Type": "application/json"
@@ -112,7 +114,7 @@ const Page = () => {
       console.log(res)
 
     } else {
-      const result = await fetch(`http://localhost:3000/api/product/updateproduct/?id=${updStatus.item.id}`, {
+      const result = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/product/updateproduct/?id=${updStatus.item.id}`, {
         method: "PUT",
         // body: JSON.stringify(product)
         body: formData

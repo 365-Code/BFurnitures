@@ -8,7 +8,7 @@ export async function getData() {
   try{
 
 
-    const res = await fetch('http://localhost:3000/api/product/getproduct', {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/product/getproduct`, {
       cache: 'no-store',
     })
 
