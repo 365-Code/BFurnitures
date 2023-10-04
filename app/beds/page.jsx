@@ -9,7 +9,7 @@ async function getServerSideProps(){
   try{
     connectDB()
 
-    const products = await productModel.find({category: "bed"})
+    const products = await productModel.find({category: "beds"})
 
     return {
       products
