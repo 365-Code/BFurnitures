@@ -1,6 +1,5 @@
 import React from 'react'
 import Cards from '../../components/Cards'
-import productItems from '../../utils/productItem'
 import connectDB from '@/libs/db';
 
 async function getServerSideProps(category){
