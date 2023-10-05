@@ -1,4 +1,5 @@
 import Cards from '@/components/Cards';
+import Spinner from '@/components/Spinner';
 import connectDB from '@/libs/db'
 import categoryModel from '@/models/categoryModel';
 import productModel from '@/models/productModel'
@@ -41,7 +42,9 @@ const Page = async ({params}) => {
 
     if(!items){
 
-        return null
+        return (
+            <Spinner/>
+        )
     }
 
     const products = items
