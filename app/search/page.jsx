@@ -2,7 +2,7 @@
 import Loader from '@/components/Loader'
 import ProductCard from '@/components/ProductCard'
 import Skeleton from '@/components/Skeleton'
-import { categories } from '@/utils/productItem'
+import { categories } from '@/utils/utils'
 import React, { useEffect, useRef, useState } from 'react'
 import { BiSolidDownArrow, BiSearch } from 'react-icons/bi'
 import { FaFilter } from 'react-icons/fa'
