@@ -40,16 +40,11 @@ export async function GET( request ){
             }).sort({updatedAt: -1}).skip(pages).limit(lmt)
         }
 
-     
 
+    const total = await productModel.find({}).count();
 
      msg = `Search Result For ${ctg} ${search}`
-    // if(!products.length){
-    //      products = await productModel.find({}).sort({updatedAt: -1}).skip(pages).limit(lmt)
-    //      fetched = await productModel.find({}).count();
-    //      msg = "Our Catalog"
-    // }
 
 
-    return NextResponse.json( {fetched: products.length, products, msg, success: true});
+    return NextResponse.json( {total, products, msg, success: true});
 }

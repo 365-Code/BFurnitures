@@ -53,8 +53,6 @@ export async function POST( request ){
         fs.unlink(path, (err)=>{
             if(err){
                 console.log(err)
-            } else{
-                console.log("Deleted Successfully")
             }
         })
 

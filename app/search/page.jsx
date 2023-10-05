@@ -29,12 +29,11 @@ const Page = () => {
   const [page, setPage] = useState(1);
   const [filter, setFilter] = useState({title: "Our Catalog", search: '', category: ''})
   const [loading, setLoading] = useState(true)
+  const [hasMore, setHasMore] = useState(true)
   const itm = Array(0,1,2,3,4,5,6,7,8,9)
 
   const loadProducts = async (page=1,search,category)=>{
-      const res = await fetch(`/api/product/searchproduct/?page=${page}&search=${search}&category=${category}`, {
-        cache: 'no-store'
-    })
+      const res = await fetch(`/api/product/searchproduct/?page=${page}&search=${search}&category=${category}`)
     const response = await res.json();
     return response;
   }
@@ -68,15 +67,26 @@ const Page = () => {
 
     const getproduct = async (page, search, category)=>{
       setLoading(true);
-      const result = await loadProducts(page, search, category);
+      const res = await loadProducts(page, search, category);
+
+      const total = res.total
+
+      const items = [...products, ...res.products]
+
+      if(items.length >= total){
+        setHasMore(false)
+      }
+
+
 
       setLoading(false)
-      setProducts([...products, ...result.products]);
+      // setProducts([...products, ...result.products]);
+      setProducts(items)
     }
 
-    // const timeOut = setTimeout(()=>{
+    const timeOut = setTimeout(()=>{
       getproduct(page, filter.search, filter.category);
-    // }, 2000)
+    }, 2000)
 
     // return ()=>(clearTimeout(timeOut))
   }, [page])
@@ -158,11 +168,15 @@ const Page = () => {
 
           { loading
           ? <Loader/>
-          : <button 
+          : (
+            hasMore &&
+            <button 
             onClick={()=>{setPage(page+1)}}
             className='p-2 bg-slate-400 border rounded-sm text-slate-200 mx-auto flex gap-2 hover:bg-slate-600  items-center'> 
             Load More <BiSolidDownArrow/>
             </button>
+          )
+        
           }
       </div>
 

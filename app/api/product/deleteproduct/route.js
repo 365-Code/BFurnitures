@@ -14,7 +14,9 @@ export async function DELETE( request){
         const {searchParams} = new URL(request.url);
         const pId = searchParams.get("pId");
 
-        const product = await productModel.findByIdAndDelete(pId)
+        await productModel.findByIdAndDelete(pId)
+
+        console.log("Delete is working")
         // const product = await testModel.findByIdAndDelete(pId)
 
         return NextResponse.json({success: true, msg: "Deleted Successfully"});
@@ -22,6 +24,6 @@ export async function DELETE( request){
     } catch (error){
 
         console.log(error);
-        return NextResponse.json({success: false, msg: "Error in Update Product"})
+        return NextResponse.json({success: false, msg: "Error in Delete Product"})
     }
 }
