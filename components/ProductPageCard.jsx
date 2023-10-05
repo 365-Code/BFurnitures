@@ -16,7 +16,7 @@ const ProductPageCard = ({ slug }) => {
 
   const [item, setItem] = useState('')
   const [preview, setPreview] = useState(false)
-  const [unit, setUnit] = useState('cm');
+  const [unit, setUnit] = useState('in');
   const [qty, setQty] = useState(1);
   const { addToCart, clearCart, setCart } = useCart();
 
@@ -97,12 +97,12 @@ const ProductPageCard = ({ slug }) => {
                   <div className="flex h-full justify-between border border-slate-500 px-2 py-1 font-semibold">
                     <div className="mx-auto">
                       <p className="text-xs uppercase text-slate-400">Height</p>
-                      <p className="font-bold">{unit == "cm" ? item?.height : item?.height / (2.5)} {unit}</p>
+                      <p className="font-bold">{unit == "cm" ? item?.height * (2.5) : item?.height } {unit}</p>
                     </div>
                     <hr className="h-full w-[1px] bg-slate-400" />
                     <div className="mx-auto">
                       <p className="text-xs uppercase text-slate-400">Width</p>
-                      <p className="font-bold"> {unit == "cm" ? item?.width : item?.width / (2.5)} {unit}</p>
+                      <p className="font-bold"> {unit == "cm" ? item?.width * (2.5) : item?.width} {unit}</p>
                     </div>
                   </div>
                   <div>

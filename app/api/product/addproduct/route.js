@@ -47,7 +47,6 @@ export async function POST( request ){
         const result = await cloudinary.uploader.upload(path, {upload_preset: "bfurn_preset"}, (err, result)=>{
             if(err){
                 console.log(err)
-
             }
         })
 
@@ -70,7 +69,7 @@ export async function POST( request ){
 
     } catch (err){
         console.log(err);
-        return NextResponse.json({success: false, msg: "Error in test product"}, {status: 500})
+        return NextResponse.json({success: false, msg: "Error in Add product"}, {status: 500})
     }
 
 
