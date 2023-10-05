@@ -17,16 +17,16 @@ const Footer = () => {
         <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
         <nav className="list-none mb-10">
           <li>
-            <a className="cursor-pointer text-gray-600 hover:text-gray-800">Beds</a>
+            <Link href={'/beds'} className="cursor-pointer text-gray-600 hover:text-gray-800">Beds</Link>
           </li>
           <li>
-            <a className="cursor-pointer text-gray-600 hover:text-gray-800">Sofas</a>
+            <Link href={'/sofas'} className="cursor-pointer text-gray-600 hover:text-gray-800">Sofas</Link>
           </li>
           <li>
-            <a className="cursor-pointer text-gray-600 hover:text-gray-800">Decoratives</a>
+            <Link href={'/decors'} className="cursor-pointer text-gray-600 hover:text-gray-800">Decoratives</Link>
           </li>
           <li>
-            <a className="cursor-pointer text-gray-600 hover:text-gray-800">Table</a>
+            <Link href={'/tables'} className="cursor-pointer text-gray-600 hover:text-gray-800">Table</Link>
           </li>
         </nav>
       </div>
@@ -34,13 +34,13 @@ const Footer = () => {
         <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
         <nav className="list-none mb-10">
           <li>
-            <a className="cursor-pointer text-gray-600 hover:text-gray-800">Chairs</a>
+            <Link href={'/chairs'} className="cursor-pointer text-gray-600 hover:text-gray-800">Chairs</Link>
           </li>
           <li>
-            <a className="cursor-pointer text-gray-600 hover:text-gray-800">Almirah</a>
+            <Link href={'/almirah'} className="cursor-pointer text-gray-600 hover:text-gray-800">Almirah</Link>
           </li>
           <li>
-            <a className="cursor-pointer text-gray-600 hover:text-gray-800">Shelves</a>
+            <Link href={'/shelves'} className="cursor-pointer text-gray-600 hover:text-gray-800">Shelves</Link>
           </li>
         </nav>
       </div>
@@ -48,13 +48,13 @@ const Footer = () => {
         <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">PROFILE</h2>
         <nav className="list-none mb-10">
           <li>
-            <a className="cursor-pointer text-gray-600 hover:text-gray-800">About Us</a>
+            <Link href={'/about'} className="cursor-pointer text-gray-600 hover:text-gray-800">About Us</Link>
           </li>
           <li>
-            <a className="cursor-pointer text-gray-600 hover:text-gray-800">Services</a>
+            <Link href={'/services'} className="cursor-pointer text-gray-600 hover:text-gray-800">Services</Link>
           </li>
           <li>
-            <a className="cursor-pointer text-gray-600 hover:text-gray-800">Contacts</a>
+            <Link href={'/contact'} className="cursor-pointer text-gray-600 hover:text-gray-800">Contacts</Link>
           </li>
         </nav>
       </div>

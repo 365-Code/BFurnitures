@@ -32,8 +32,9 @@ const Page = () => {
       setLoading(false)
       setProducts(res.products);
       if(filter.search || filter.category){
-        const msg = 
-        setFilter({...filter, title: `${res.msg} ` })
+        setFilter({...filter, title: `${res.msg}` })
+      } else{
+        setFilter({...filter, title: `Our Catalog` })
       }
     }
 
@@ -141,7 +142,7 @@ const Page = () => {
             </span>
           </div>
 
-          <h1 className="text-center text-xl">{filter.title} </h1>
+          <h1 className="text-center text-xl">{filter.title}</h1>
           <hr />
         </div>
 

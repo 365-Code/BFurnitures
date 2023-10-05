@@ -83,9 +83,7 @@ const CartState = ({children})=>{
     }
 
     const removeFromWishList = (_id)=>{
-        setWishlist((wList)=>{
-            wList.filter((item)=>(item._id !== _id))
-        })
+        setWishlist((wList)=>wList.filter((item)=>(item._id !== _id)))
     }
 
 

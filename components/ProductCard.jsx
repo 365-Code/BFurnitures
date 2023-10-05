@@ -9,7 +9,7 @@ import { toastOptions } from '@/utils/utils'
 
 const ProductCard = ({item}) => {
 
-    const {wishlist, addToCart, addToWishList} = useCart();
+    const {wishlist, addToCart, addToWishList, removeFromWishList} = useCart();
     const [inWishlist, setInWishlist] = useState(false)
 
     const handleCart = ()=>{
@@ -18,9 +18,12 @@ const ProductCard = ({item}) => {
     }
 
     const handleWishlist = ()=>{
-        if( !inWishlist ){
+        if( !(wishlist?.includes(item)) ){
             toast.success(`${item.title} to Wishlist`, toastOptions);
             addToWishList(item)
+            setInWishlist(true)
+        } else{
+            toast.success("Already in Wishlist");
             setInWishlist(true)
         }
     }

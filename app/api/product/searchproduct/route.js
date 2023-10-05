@@ -40,8 +40,6 @@ export async function GET( request ){
          products = await productModel.find({
                 slug : {$regex : search , $options: "i"}
             }).sort({updatedAt: -1}).skip(pages).limit(lmt)
-        
-        msg = msg + "- No Result Found"
         }
 
 
