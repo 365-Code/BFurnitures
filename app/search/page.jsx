@@ -2,31 +2,17 @@
 import Loader from '@/components/Loader'
 import ProductCard from '@/components/ProductCard'
 import Skeleton from '@/components/Skeleton'
-import { categories } from '@/utils/utils'
-import React, { useEffect, useRef, useState } from 'react'
+// import { categories } from '@/utils/utils'
+import React, { useEffect, useState } from 'react'
 import { BiSolidDownArrow, BiSearch } from 'react-icons/bi'
-import { FaFilter } from 'react-icons/fa'
-import { MdClose, MdFilter, MdFilter1 } from 'react-icons/md'
-import { toast } from 'react-toastify'
-// export async function getServerSideProps(page) {
-
-//   const res = await fetch(`/api/product/getproduct/?page=${page}`, {
-//     cache: 'no-store'
-//   })
-
-//   const {products} = await res.json()
-
-//   return {
-//     products
-//   }
-
-// }
+import { MdClose } from 'react-icons/md'
 
 
 const Page = () => {
 
   const [products, setProducts] = useState([])
   const [page, setPage] = useState(1);
+  const [categories, setCategories] = useState([]);
   const [filter, setFilter] = useState({title: "Our Catalog", search: '', category: ''})
   const [loading, setLoading] = useState(true)
   const [hasMore, setHasMore] = useState(true)
@@ -42,11 +28,13 @@ const Page = () => {
 
     const getproduct = async (search, category)=>{
       setLoading(true);
-      const result = await loadProducts(1,search, category);
+      const res = await loadProducts(1,search, category);
       setLoading(false)
-      setProducts(result.products);
-      if(filter.search || filter.category)
-        setFilter({...filter, title: `${result.fetched} ${result.msg}` })
+      setProducts(res.products);
+      if(filter.search || filter.category){
+        const msg = 
+        setFilter({...filter, title: `${res.msg} ` })
+      }
     }
 
     const timeOut = setTimeout(()=>{
@@ -55,13 +43,6 @@ const Page = () => {
 
     return ()=>(clearTimeout(timeOut))
   }, [filter.search, filter.category])
-
-  // const loadMore = async (page)=>{
-  //     setLoading(true);
-  //     const items = await loadProducts(page, filter.search, filter.category);
-  //     setProducts([...products, ...items]);
-  //     setLoading(false)
-  // }
 
   useEffect(()=>{
 
@@ -77,8 +58,6 @@ const Page = () => {
         setHasMore(false)
       }
 
-
-
       setLoading(false)
       // setProducts([...products, ...result.products]);
       setProducts(items)
@@ -88,8 +67,23 @@ const Page = () => {
       getproduct(page, filter.search, filter.category);
     }, 2000)
 
-    // return ()=>(clearTimeout(timeOut))
+    return ()=>(clearTimeout(timeOut))
   }, [page])
+
+  useEffect(()=>{
+    const getCategories = async ()=>{
+      const result = await fetch(`/api/category`);
+
+      const res = await result.json();
+
+      if(res.success){
+        setCategories(res.categories)
+      }
+    }
+
+    getCategories();
+
+  }, [])
 
 
   const handleChange = (e)=>{
@@ -109,21 +103,21 @@ const Page = () => {
         <div className="flex flex-col h-screen gap-1">
 
           {
-            categories?.map((category, index)=>{
+            categories?.map((ctg, index)=>{
               return (
-                <label htmlFor={`category-${index}`} key={index}>
-                  <div className={`${filter.category === category && "bg-gradient-to-r from-[#d1d1d1] to-[#b6b6b6]"} hover:bg-[#d1d1d1] transition-all rounded-l-lg flex items-center space-x-4 p-2 cursor-pointer`}>
-                    <input checked={filter.category === category} type="radio" onChange={handleChange} value={category} name="category" id={`category-${index}`} className="h-4 w-4 accent-[#7079a8]" />
-                    <span className="capitalize font-normal cursor-pointer">{category}</span>
+                <label htmlFor={`category-${ctg._id}`} key={ctg._id}>
+                  <div className={`${filter.category === ctg.category && "bg-gradient-to-r from-[#d1d1d1] to-[#b6b6b6]"} hover:bg-[#d1d1d1] transition-all rounded-l-lg flex items-center space-x-4 p-2 cursor-pointer`}>
+                    <input checked={filter.category === ctg.category} type="radio" onChange={handleChange} value={ctg.category} name="category" id={`category-${ctg._id}`} className="h-4 w-4 accent-[#7079a8]" />
+                    <span className="capitalize font-normal cursor-pointer">{ctg.category}</span>
                   </div>
                 </label>
               )
             })
           }
 
-          <div className='flex gap-2 mt-4'>
+          <div className='flex gap-2 mt-4 text-center'>
             {/* <button className='py-1 px-3 border text-[#ffffff] bg-blue-500 hover:bg-blue-600 flex gap-2 items-center'>Filter<FaFilter/> </button> */}
-            <button onClick={()=>{setFilter( {title: "Our Catalog", search: '', category: ''})}} className='py-1 px-3 border text-[#ffffff] bg-red-500 hover:bg-red-600 flex gap-2 items-center'>Clear<MdClose/> </button>
+            <button onClick={()=>{setFilter( {title: "Our Catalog", search: '', category: ''})}} className='py-1 px-3 border w-full justify-center text-[#ffffff] bg-red-500 hover:bg-red-600 flex gap-2 items-center'>Clear<MdClose/> </button>
           </div>
 
         </div>

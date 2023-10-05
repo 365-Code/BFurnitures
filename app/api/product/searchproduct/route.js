@@ -23,6 +23,8 @@ export async function GET( request ){
     //     products = await productModel.find().sort({updatedAt: -1});
     // }
 
+    msg = `Search Result For ${ctg} ${search}`
+
     products = await productModel.find({
         $or: [
             {
@@ -38,12 +40,13 @@ export async function GET( request ){
          products = await productModel.find({
                 slug : {$regex : search , $options: "i"}
             }).sort({updatedAt: -1}).skip(pages).limit(lmt)
+        
+        msg = msg + "- No Result Found"
         }
 
 
     const total = await productModel.find({}).count();
 
-     msg = `Search Result For ${ctg} ${search}`
 
 
     return NextResponse.json( {total, products, msg, success: true});
