@@ -10,6 +10,7 @@ import { useAuth } from '@/context/AuthState'
 import { usePathname, useRouter } from 'next/navigation'
 import Dropdown from './Dropdown'
 import { toast } from 'react-toastify'
+import { toastOptions } from '@/utils/utils'
 
 
 const Header = () => {
@@ -33,13 +34,6 @@ const Header = () => {
       ref.current.classList.remove('translate-x-0')
       ref.current.classList.add('translate-x-full')
     }
-  }
-
-  const toastOptions = {
-    position: "top-center",
-    autoClose: 1000,
-    hideProgressBar: true,
-    theme: "colored"
   }
 
   const { auth, setAuth, clearAuth } = useAuth();

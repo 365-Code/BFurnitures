@@ -1,5 +1,6 @@
 "use client"
 import { useAuth } from '@/context/AuthState'
+import { toastOptions } from '@/utils/utils'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useRef, useState } from 'react'
@@ -22,18 +23,10 @@ const Page = () => {
 
   const ref = useRef()
 
-  const toastOptions = {
-    position: "top-center",
-    autoClose: 1000,
-    hideProgressBar: true,
-    theme: "colored"
-  }
-
   const handleChange = (e)=>{
     let {name, value} = e.target;
     if(name == 'avatar'){
       value = e.target.files[0];
-      console.log(value)
     }
     setUserDetails({...userDetails, [name]: value})
   }
@@ -61,7 +54,6 @@ const Page = () => {
     const res = await data.json();
 
     if(res.success){
-      console.log(res)
       toast.success(res.msg, toastOptions)
       setTimeout(()=>{
         router.push('/login')

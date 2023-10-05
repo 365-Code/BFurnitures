@@ -5,15 +5,9 @@ import { useCart } from '../context/CartState'
 import Link from 'next/link'
 import { toast } from 'react-toastify'
 import { BsFillHeartFill, BsHeart } from 'react-icons/bs'
+import { toastOptions } from '@/utils/utils'
 
 const ProductCard = ({item}) => {
-
-    const toastOptions = {  
-        position: "top-right",
-        autoClose: 1000,
-        hideProgressBar: true,
-        theme: "light"
-      }
 
     const {wishlist, addToCart, addToWishList} = useCart();
     const [inWishlist, setInWishlist] = useState(false)

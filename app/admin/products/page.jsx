@@ -1,5 +1,6 @@
 "use client"
 import AdminSideBar from '@/components/AdminSideBar'
+import { toastOptions } from '@/utils/utils'
 import React, { useEffect, useRef, useState } from 'react'
 import { MdAddBox, MdCancel, MdClose, MdDelete, MdEdit, MdPhotoCamera, MdSearch } from 'react-icons/md'
 import { toast } from 'react-toastify'
@@ -26,32 +27,33 @@ const Page = () => {
   const [photo, setPhoto] = useState('');
   
   const ref = useRef();
-  const toastOptions = {
-    position: "top-right",
-    autoClose: 1000,
-    hideProgressBar: true,
-    theme: "light"
-  }
 
 
   useEffect(() => {
     const getProducts = async () => {
-      try{
 
         const result = await fetch(`/api/product/getproduct`)
         
         const res = await result.json();
 
-        setProducts(res.products)
-        setDisplayProducts(res.products)
-      } catch (error){
-        console.log(error)
-      }
+        if(res.success){
+          setProducts(res.products)
+          setDisplayProducts(res.products)
+        }
     }
     getProducts()
 
-
   }, [])
+
+  useEffect(()=>{
+    
+    const timeOut = setTimeout(()=>{
+      handleSearch();
+    }, 1000)
+
+    return ()=>{clearTimeout(timeOut)}
+    
+  }, [search])
 
   const handleDelete = async () => {
 
@@ -67,13 +69,13 @@ const Page = () => {
 
       setDisplayProducts((items) =>
         items.filter((item) => {
-          return item._id != pId
+          return (item._id != pId)
         })
       )
 
       setProducts((items) =>
         items.filter((item) => {
-          return item._id != pId
+          return (item._id != pId)
         })
       )
 
@@ -116,7 +118,6 @@ const Page = () => {
       }
 
       showProduct(false)
-      console.log(res)
 
     } else {
       const result = await fetch(`/api/product/updateproduct/?id=${updStatus.item.id}`, {
@@ -148,16 +149,6 @@ const Page = () => {
 
     }
   }
-
-  useEffect(()=>{
-    
-    const timeOut = setTimeout(()=>{
-      handleSearch();
-    }, 1000)
-
-    return ()=>{clearTimeout(timeOut)}
-    
-  }, [search])
   
   const handleSearch = () => {
     const newPro = products.filter((item)=> {return (item.title.includes(search) || item.slug.includes(search)  || item.category.includes(search) ) })

@@ -1,6 +1,5 @@
 import connectDB from "@/libs/db";
 import productModel from "@/models/productModel";
-import testModel from "@/models/testModel";
 import { NextResponse } from "next/server";
 
 
@@ -16,14 +15,10 @@ export async function DELETE( request){
 
         await productModel.findByIdAndDelete(pId)
 
-        console.log("Delete is working")
-        // const product = await testModel.findByIdAndDelete(pId)
-
         return NextResponse.json({success: true, msg: "Deleted Successfully"});
 
-    } catch (error){
-
-        console.log(error);
+    } catch (err){
+        console.log(err);
         return NextResponse.json({success: false, msg: "Error in Delete Product"})
     }
 }

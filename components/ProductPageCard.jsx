@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import SkeletonProductPage from './SkeletonProductPage';
 import { toast } from 'react-toastify';
 import PictureViewer from './PictureViewer';
+import { toastOptions } from '@/utils/utils';
 
 
 
@@ -21,26 +22,17 @@ const ProductPageCard = ({ slug }) => {
 
   const router = useRouter();
 
-  const toastOptions = {  
-    position: "top-right",
-    autoClose: 1000,
-    hideProgressBar: true,
-    theme: "light"
-  }
-
-
   useEffect(() => {
 
     const getSingleProduct = async () => {
-      const res = await fetch(`/api/product/getsingleproduct/?slug=${slug}`);
+      const result = await fetch(`/api/product/getsingleproduct/?slug=${slug}`);
 
-      const json = await res.json()
+      const res = await result.json()
 
-      if (!(json.success)) {
-        console.log("Error")
+      if ((res.success)) {
+        setItem(res.product);
       }
 
-      setItem(json.product);
 
     }
 

@@ -108,3 +108,10 @@ export const categories = [
     "decors",
     "almirah"
 ]
+
+export const toastOptions = {
+    position: "top-right",
+    autoClose: 1000,
+    hideProgressBar: true,
+    theme: "light"
+}

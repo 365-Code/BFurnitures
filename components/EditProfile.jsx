@@ -14,8 +14,6 @@ const EditProfile = ({userDet, setUserDet, setVisible}) => {
   }
 
   const handleUpdate = async ()=>{
-    console.log(details);
-
     const result = await fetch(`/api/delivery?uId=${details.uId}`, {
       method: "PUT",
       body: JSON.stringify(details)
@@ -28,9 +26,6 @@ const EditProfile = ({userDet, setUserDet, setVisible}) => {
       setVisible("editModeOff")
     }
   }
-
-  console.log(details)
-
 
   return (
     <div className="min-h-screen absolute top-0 left-0 w-screen p-6 bg-black/10">

@@ -13,9 +13,10 @@ export async function GET(request){
     const {searchParams} = new URL(request.url);
 
     const slug = searchParams.get("slug");
+
     
-    // const product = await productModel.findOne({slug})
-    const product = await testModel.findOne({slug})
+    const product = await productModel.findOne({slug})
+    // const product = await testModel.findOne({slug})
 
     
 
@@ -25,8 +26,8 @@ export async function GET(request){
 
     return NextResponse.json({success:true, product})
         
-    } catch (error){
-        console.log(error);
+    } catch (err){
+        console.log(err);
         return NextResponse.json({success: false, msg: "Error in get single product"}, {status: 500})
     }
 

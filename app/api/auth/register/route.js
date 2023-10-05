@@ -12,8 +12,6 @@ export async function POST(request){
 
         const user = await request.json()
 
-        console.log(user)
-
         const existingUser = await userModel.findOne({email: user.email});
 
         if(existingUser){

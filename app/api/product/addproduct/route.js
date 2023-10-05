@@ -47,6 +47,7 @@ export async function POST( request ){
         const result = await cloudinary.uploader.upload(path, {upload_preset: "bfurn_preset"}, (err, result)=>{
             if(err){
                 console.log(err)
+
             }
         })
 
@@ -56,7 +57,7 @@ export async function POST( request ){
             }
         })
 
-        const image = result.secure_url
+        const image = result.secure_url;
 
         let product = {title, image, slug, price, description, stock, width, height, tag, category }
 
@@ -67,8 +68,8 @@ export async function POST( request ){
 
         return NextResponse.json({ success: true, msg: "Product Added Successfully", product});
 
-    } catch (error){
-        console.log(error);
+    } catch (err){
+        console.log(err);
         return NextResponse.json({success: false, msg: "Error in test product"}, {status: 500})
     }
 

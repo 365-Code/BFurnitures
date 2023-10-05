@@ -7,6 +7,7 @@ import {v2 as cloudinary} from 'cloudinary'
 import {writeFile} from 'fs/promises'
 import fs from 'fs'
 import testModel from "@/models/testModel";
+import { isStringObject } from "util/types";
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -38,11 +39,15 @@ export async function PUT( request){
         
         const slug = slugify(title.toLowerCase(), "-");
 
+        
+        let product = {title, slug, price, description, stock, width, height, tag, category }
+
         // await productModel.create(newData);
 
         const file = formData.get('image')
+
         let image = ''
-        if(file){
+        if( isStringObject(file) ){
             const bytes = await file.arrayBuffer();
             const buffer = Buffer.from(bytes)
             const path = `./public/uploads/${file.name}`
@@ -60,18 +65,14 @@ export async function PUT( request){
                 }
             })
             image = result.secure_url
+            product.image = image
         }
             
 
 
-        let product = {title, slug, price, description, stock, width, height, tag, category }
-
-        if(file){
-            product.image = image
-        }
 
 
-        // const product = await productModel.findByIdAndUpdate(id, {$set: {...data} })
+        await productModel.findByIdAndUpdate(id, {$set: {...product} })
         product = await productModel.findById(id);
         
         // await testModel.findByIdAndUpdate(id, {$set: {...product} })
@@ -79,9 +80,8 @@ export async function PUT( request){
 
         return NextResponse.json({success: true, msg: "Updated Successfully", product })
 
-    } catch (error){
-
-        console.log(error);
+    } catch (err){
+        console.log(err);
         return NextResponse.json({success: false, msg: "Error in Update Product"})
     }
 }

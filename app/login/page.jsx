@@ -1,5 +1,6 @@
 "use client"
 import { useAuth } from '@/context/AuthState'
+import { toastOptions } from '@/utils/utils'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
@@ -16,14 +17,6 @@ const Page = () => {
     email: '',
     password: ''
   })
-  
-  const toastOptions = {
-    position: "top-center",
-    autoClose: 1000,
-    hideProgressBar: true,
-    theme: "colored"
-  }
-
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -50,7 +43,6 @@ const Page = () => {
       setTimeout(()=>{
         router.push('/')
       }, 1100)
-
     } else{
       toast.error(res.msg, toastOptions)
     }
