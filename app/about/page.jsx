@@ -5,7 +5,7 @@ const Page = () => {
     <div className='py-4 px-6 text-center'>
         <h1 className='text-4xl font-semibold'>About Us</h1>
 
-        <div className='text-justify space-y-4 mt-4 mx-auto w-1/2'>
+        <div className='text-justify space-y-4 mt-4 mx-auto w-[90%] sm:w-1/2'>
             <p>Welcome to our esteemed furniture establishment. We take great pride in introducing ourselves as a leading provider of high-quality furniture. With a rich history spanning several decades, our business has garnered a reputation for excellence and reliability in the industry.</p>
             <hr />
             <p>Our commitment to craftsmanship and attention to detail sets us apart from our competitors. Each piece of furniture is meticulously crafted by skilled artisans, ensuring durability and aesthetic appeal. We source only the finest materials, prioritizing sustainability and ethical practices.</p>

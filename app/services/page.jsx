@@ -5,7 +5,7 @@ const Page = () => {
     <div className='py-4 px-6 text-center'>
         <h1 className='text-4xl font-semibold'>Services Offered By Our Business</h1>
 
-        <div className='text-justify space-y-4 mt-4 mx-auto w-1/2'>
+        <div className='text-justify space-y-4 mt-4 mx-auto w-[90%] sm:w-1/2'>
             <p>Welcome to our esteemed furniture business, where we take pride in offering a wide range of exceptional services to cater to all your furniture needs. With our extensive experience and expertise in the industry, we guarantee top-notch quality and customer satisfaction.</p>
             <hr />
             <h2>1. Custom Furniture Design:</h2>

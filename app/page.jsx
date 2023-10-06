@@ -11,11 +11,13 @@ export async function getData() {
 
     // const result = await fetch(`/api/product/getproduct`)
     connectDB()
-    const featured = await productModel.find({tag: "featured"})
 
-    const trending = await productModel.find({tag: "trending"})  
+    const _featured = await productModel.find({tag: "featured"}).sort({updatedAt: -1})
 
+    const _trending = await productModel.find({tag: "trending"}).sort({updatedAt: -1})
 
+    const featured = JSON.parse(JSON.stringify(_featured))
+    const trending = JSON.parse(JSON.stringify(_trending))
 
     return {
       featured,
@@ -30,10 +32,13 @@ export async function getData() {
 
 const Page = async () => {
 
-  let {featured, trending} = await getData();
+  let items = await getData();
 
-  featured = JSON.parse(JSON.stringify(featured))
-  trending = JSON.parse(JSON.stringify(trending))
+  if(!items){
+    return null
+  }
+
+  const {featured, trending} = items
 
   // if(!items){
   //   return null
