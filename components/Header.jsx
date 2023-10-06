@@ -93,7 +93,7 @@ const Header = () => {
             <h1 className='logo font-semibold tracking-widest text-lg'>BFurnitures</h1>
           </Link>
         </div>
-        <div className={`transition-all ${menu.mode == "visible" && " z-[1] w-[80vw] h-screen bg-white/30 backdrop-blur-sm"} w-5 h-5 sm:${()=>handleMenu} p-4 overflow-hidden sm:overflow-visible absolute sm:p-0 top-0 left-0 sm:w-auto sm:h-full sm:left-0 sm:top-0 sm:relative`}>
+        <div className={`transition-all ${menu.mode == "visible" && " z-[1] w-[80vw] h-screen bg-white/30 backdrop-blur-sm"} w-[100px] h-5 sm:${()=>handleMenu} p-4 overflow-hidden sm:overflow-visible absolute sm:p-0 top-0 left-0 sm:w-auto sm:h-full sm:left-0 sm:top-0 sm:relative`}>
           <button 
           className='sm:hidden block'
           onClick={handleMenu} 
