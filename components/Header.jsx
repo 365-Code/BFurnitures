@@ -101,9 +101,9 @@ const Header = () => {
             {
               menu.mode == "hidden"
               ?
-              <MdMenu />
+              <MdMenu size={"1.6em"}/>
               :
-              <MdClose/>
+              <MdClose size={"1.6em"}/>
             }
           </button>
           <nav
