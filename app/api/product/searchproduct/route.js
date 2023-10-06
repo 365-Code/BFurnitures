@@ -38,7 +38,7 @@ export async function GET( request ){
 
      if(!products.length){
          products = await productModel.find({
-                slug : {$regex : search , $options: "i"}
+                slug : {$regex : search , $options: "xi"}
             }).sort({updatedAt: -1}).skip(pages).limit(lmt)
         }
 
