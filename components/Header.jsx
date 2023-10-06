@@ -4,7 +4,7 @@ import Link from 'next/link'
 import React, { useEffect, useRef, useState } from 'react'
 import { BiSolidCartAlt, BiSolidHeart } from 'react-icons/bi'
 import SideCart from './SideCart'
-import { MdAccountCircle, MdManageAccounts, MdLogout } from 'react-icons/md'
+import { MdAccountCircle, MdManageAccounts, MdLogout, MdMenu } from 'react-icons/md'
 import { FaBoxes } from 'react-icons/fa'
 import { useAuth } from '@/context/AuthState'
 import { usePathname, useRouter } from 'next/navigation'
@@ -23,6 +23,7 @@ const Header = () => {
   const router = useRouter();
 
   const [dropdown, setDropDown] = useState('h-0');
+  const [menu, setMenu] = useState({mode: "hidden", position: "-translate-x-[150%] left-4 top-4"})
 
 
   const toggleCart = () => {
@@ -65,6 +66,13 @@ const Header = () => {
     }
   }, [])
 
+  const handleMenu = ()=>{
+    if(menu.mode == "hidden")
+      setMenu({mode: "visible", position:"translate-y-[0%]"})
+    else
+      setMenu({mode: "hidden", position:"-translate-y-[150%] top-4 left-4"})
+  }
+
 
   return (
     <>
@@ -75,7 +83,7 @@ const Header = () => {
      <div className='relative h-[138px] sm:h-[158px] md:h-[78px] bg-[#E7E7E7]' />
 
       <div id='navbar'
-        className="top-0 left-0 z-10 bg-white/30 backdrop-blur-sm w-full fixed flex flex-wrap flex-col px-6 py-4 md:flex-row items-center" //flex-wrap flex-col
+        className="top-0 left-0 z-10 bg-white/30 backdrop-blur-sm w-full fixed flex flex-wrap justify-between flex-col px-6 py-4 md:flex-row items-center" //flex-wrap flex-col
       >
 
         <div
@@ -85,15 +93,22 @@ const Header = () => {
             <h1 className='logo font-semibold tracking-widest text-lg'>BFurnitures</h1>
           </Link>
         </div>
-
-        <nav
-          className=" sm:flex hidden md:ml-auto md:mr-auto sm:relative sm:flex-row absolute left-0 top-0 flex-wrap items-center gap-x-4 text-base justify-center">
-          <Link href={'/beds'} className="mr-5 text-sm font-semibold hover:text-gray-900 uppercase">Beds</Link>
-          <Link href={'/sofas'} className="mr-5 text-sm font-semibold hover:text-gray-900 uppercase">Sofas</Link>
-          <Link href={'/tables'} className="mr-5 text-sm font-semibold hover:text-gray-900 uppercase">Tables</Link>
-          <Link href={'/decoratives'} className="mr-5 text-sm font-semibold hover:text-gray-900 uppercase">Decoratives</Link>
-          <Link href={'/search'} className="mr-5 text-sm font-semibold hover:text-gray-900 uppercase">Categories</Link>
-        </nav>
+        <div className='overflow-hidden sm:overflow-visible h-full w-full sm:w-auto sm:h-full absolute top-6 left-4 sm:left-0 sm:top-0 sm:relative'>
+          <button 
+          className='sm:hidden block'
+          onClick={handleMenu} 
+          >
+            <MdMenu />
+          </button>
+          <nav
+            className={`${menu.position} sm:translate-y-0 sm:top-0 left-0 transition-all flex flex-col absolute flex-wrap items-start sm:items-center gap-x-4 text-base sm:flex md:ml-auto md:mr-auto sm:relative sm:flex-row`}>
+            <Link href={'/beds'} className=" mr-5 text-sm font-semibold hover:text-gray-900 uppercase">Beds</Link>
+            <Link href={'/sofas'} className="mr-5 text-sm font-semibold hover:text-gray-900 uppercase">Sofas</Link>
+            <Link href={'/tables'} className="mr-5 text-sm font-semibold hover:text-gray-900 uppercase">Tables</Link>
+            <Link href={'/decoratives'} className="mr-5 text-sm font-semibold hover:text-gray-900 uppercase">Decoratives</Link>
+            <Link href={'/search'} className="mr-5 text-sm font-semibold hover:text-gray-900 uppercase">Categories</Link>
+          </nav>
+        </div>
         <div className='flex items-center gap-2'>
           {
             auth?.token
