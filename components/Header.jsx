@@ -4,7 +4,7 @@ import Link from 'next/link'
 import React, { useEffect, useRef, useState } from 'react'
 import { BiSolidCartAlt, BiSolidHeart } from 'react-icons/bi'
 import SideCart from './SideCart'
-import { MdAccountCircle, MdManageAccounts, MdLogout, MdMenu } from 'react-icons/md'
+import { MdAccountCircle, MdManageAccounts, MdLogout, MdMenu, MdClose } from 'react-icons/md'
 import { FaBoxes } from 'react-icons/fa'
 import { useAuth } from '@/context/AuthState'
 import { usePathname, useRouter } from 'next/navigation'
@@ -66,11 +66,11 @@ const Header = () => {
     }
   }, [])
 
-  const handleMenu = ()=>{
-    if(menu.mode == "hidden")
-      setMenu({mode: "visible", position:"translate-y-[0%]"})
+  const handleMenu = (mode)=>{
+    if(mode == "hide" || menu.mode == "visible")
+      setMenu({mode: "hidden", position:"-translate-x-[150%]"})
     else
-      setMenu({mode: "hidden", position:"-translate-y-[150%] top-4 left-4"})
+      setMenu({mode: "visible", position:"translate-x-0 top-12"})
   }
 
 
@@ -93,20 +93,26 @@ const Header = () => {
             <h1 className='logo font-semibold tracking-widest text-lg'>BFurnitures</h1>
           </Link>
         </div>
-        <div className='overflow-hidden sm:overflow-visible h-full w-full sm:w-auto sm:h-full absolute top-6 left-4 sm:left-0 sm:top-0 sm:relative'>
+        <div className={`transition-all ${menu.mode == "visible" && " z-40  bg-white/30 backdrop-blur-sm"} w-[80vw] h-screen sm:${()=>handleMenu} p-4 overflow-hidden sm:overflow-visible absolute sm:p-0 top-0 left-0 sm:w-auto sm:h-full sm:left-0 sm:top-0 sm:relative`}>
           <button 
           className='sm:hidden block'
           onClick={handleMenu} 
           >
-            <MdMenu />
+            {
+              menu.mode == "hidden"
+              ?
+              <MdMenu />
+              :
+              <MdClose/>
+            }
           </button>
           <nav
-            className={`${menu.position} sm:translate-y-0 sm:top-0 left-0 transition-all flex flex-col absolute flex-wrap items-start sm:items-center gap-x-4 text-base sm:flex md:ml-auto md:mr-auto sm:relative sm:flex-row`}>
-            <Link href={'/beds'} className=" mr-5 text-sm font-semibold hover:text-gray-900 uppercase">Beds</Link>
-            <Link href={'/sofas'} className="mr-5 text-sm font-semibold hover:text-gray-900 uppercase">Sofas</Link>
-            <Link href={'/tables'} className="mr-5 text-sm font-semibold hover:text-gray-900 uppercase">Tables</Link>
-            <Link href={'/decoratives'} className="mr-5 text-sm font-semibold hover:text-gray-900 uppercase">Decoratives</Link>
-            <Link href={'/search'} className="mr-5 text-sm font-semibold hover:text-gray-900 uppercase">Categories</Link>
+            className={`${menu.position} gap-2 sm:gap-0 sm:translate-x-0 sm:top-0 transition-all flex flex-col absolute flex-wrap items-start sm:items-center gap-x-4 text-base sm:flex md:ml-auto md:mr-auto sm:relative sm:flex-row`}>
+            <Link onClick={()=>handleMenu("hide")} href={'/beds'} className=" mr-5 text-sm font-semibold hover:text-gray-900 uppercase">Beds</Link>
+            <Link onClick={()=>handleMenu("hide")} href={'/sofas'} className="mr-5 text-sm font-semibold hover:text-gray-900 uppercase">Sofas</Link>
+            <Link onClick={()=>handleMenu("hide")} href={'/tables'} className="mr-5 text-sm font-semibold hover:text-gray-900 uppercase">Tables</Link>
+            <Link onClick={()=>handleMenu("hide")} href={'/decoratives'} className="mr-5 text-sm font-semibold hover:text-gray-900 uppercase">Decoratives</Link>
+            <Link onClick={()=>handleMenu("hide")} href={'/search'} className="mr-5 text-sm font-semibold hover:text-gray-900 uppercase">Categories</Link>
           </nav>
         </div>
         <div className='flex items-center gap-2'>
