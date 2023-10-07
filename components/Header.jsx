@@ -10,7 +10,6 @@ import { useAuth } from '@/context/AuthState'
 import { usePathname, useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 import { toastOptions } from '@/utils/utils'
-import Spinner from './Spinner'
 
 
 const Header = () => {
@@ -38,6 +37,7 @@ const Header = () => {
   const { auth, setAuth, clearAuth, checkAdmin } = useAuth();
 
   const handleLogOut = () => {
+    setDropDown('h-0')
     clearAuth()
     router.push('/');
     toast.success("Logged Out", toastOptions)
@@ -55,19 +55,13 @@ const Header = () => {
       if( pathname.startsWith("/admin") ){
         const check = async ()=>{
           const res = await checkAdmin(data?.token);
+          console.log(res)
           if(!res.access){
-            return (
-              <div className='flex text-center justify-center sm:p-4'>
-                <h1>{res.msg}</h1>
-                <Spinner/>
-              </div>
-            )
+            router.push("/permission")
           }
         }
         check()
-      }
-
-      if( pathname == '/login' || pathname == '/register' ){
+      } else if( pathname == '/login' || pathname == '/register' ){
         router.push('/')
       } else{
         router.refresh()
@@ -75,7 +69,7 @@ const Header = () => {
     } else if( pathname.includes("admin") || pathname.includes("checkout") ){
       router.push('/')
     }
-    
+
   }, [])
 
 
@@ -147,9 +141,9 @@ const Header = () => {
                     onMouseEnter={() => (setDropDown(''))}
                     onMouseLeave={() => (setDropDown('h-0'))}
                     className={`flex ${dropdown} transition-all translate-x-0 flex-col absolute right-0 bg-slate-200 min-w-[160px] rounded-md overflow-hidden `}>
-                    <Link href={'/profile'} className="w-full text-left px-2 py-3 border-b hover:bg-slate-300 border-b-slate-300 text-slate-500 font-semibold text-sm"> <span className='flex gap-2 items-center'><MdManageAccounts /> My Account</span></Link>
-                    <Link href={'/orders'} className="w-full text-left px-2 py-3 border-b hover:bg-slate-300 border-b-slate-300 text-slate-500 font-semibold text-sm"> <span className='flex gap-2 items-center'><FaBoxes /> My Orders</span></Link>
-                    <Link href={'/wishlist'} className="w-full text-left px-2 py-3 border-b hover:bg-slate-300 border-b-slate-300 text-slate-500 font-semibold text-sm"> <span className='flex gap-2 items-center'><BiSolidHeart /> My Wishlist</span></Link>
+                    <Link href={'/profile'} onClick={()=> (setDropDown('h-0'))} className="w-full text-left px-2 py-3 border-b hover:bg-slate-300 border-b-slate-300 text-slate-500 font-semibold text-sm"> <span className='flex gap-2 items-center'><MdManageAccounts /> My Account</span></Link>
+                    <Link href={'/orders'} onClick={()=> (setDropDown('h-0'))} className="w-full text-left px-2 py-3 border-b hover:bg-slate-300 border-b-slate-300 text-slate-500 font-semibold text-sm"> <span className='flex gap-2 items-center'><FaBoxes /> My Orders</span></Link>
+                    <Link href={'/wishlist'} onClick={()=> (setDropDown('h-0'))} className="w-full text-left px-2 py-3 border-b hover:bg-slate-300 border-b-slate-300 text-slate-500 font-semibold text-sm"> <span className='flex gap-2 items-center'><BiSolidHeart /> My Wishlist</span></Link>
                     <button onClick={handleLogOut} className="w-full text-left px-2 py-3 border-b hover:bg-slate-300 border-b-slate-300 text-slate-500 font-semibold text-sm"> <span className='flex gap-2 items-center'><MdLogout /> Logout</span></button>
                   </div>
 

@@ -13,7 +13,11 @@ export async function GET(request){
 
         const admin = await userModel.findById(data.id).select("role");
 
-        return NextResponse.json({msg: "Authorized Access", access: admin?.role}, {status: 200})
+        if(!admin || !admin.role){
+            return NextResponse.json({msg: "UnAuthorized Access", access: 0 }, {status: 200})
+        }
+
+        return NextResponse.json({msg: "Authorized Access", access: 1 }, {status: 200})
     }catch (err){
         console.log(err);
         return NextResponse.json({msg: "Check Auth Error", access: 0}, {status: 500})

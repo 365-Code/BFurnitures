@@ -30,7 +30,7 @@ export async function POST(request){
 
         const token = jwt.sign( data, process.env.JWT_SECRET )
         
-        const u = await userModel.findById(existingUser._id).select("name email")
+        const u = await userModel.findById(existingUser._id).select("name email -_id")
 
         return NextResponse.json({success: true, msg: "login successful",user: u, token }, {status: 200})
 
