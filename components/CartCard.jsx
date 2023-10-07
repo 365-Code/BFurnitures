@@ -43,7 +43,7 @@ const CartCard = ({item, description}) => {
       }, 1000);
       return ()=>clearTimeout(timeOut);
     }
-    return deBounce()
+    deBounce()
 
   }, [qty] )
 

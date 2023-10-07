@@ -8,7 +8,8 @@ export async function POST(req) {
   try {
     const signature = cloudinary.utils.api_sign_request(
       paramsToSign,
-      process.env.CLOUDINARY_API_SECRET
+      process.env.CLOUDINARY_API_SECRET,
+      process.env.CLOUDINARY_API_KEY
     );
     return NextResponse.json({
       signature,

@@ -16,6 +16,6 @@ export async function GET(request){
         return NextResponse.json({msg: "Authorized Access", access: admin?.role}, {status: 200})
     }catch (err){
         console.log(err);
-        return NextResponse.json({msg: "Check Auth Error"}, {status: 500})
+        return NextResponse.json({msg: "Check Auth Error", access: 0}, {status: 500})
     }
 }

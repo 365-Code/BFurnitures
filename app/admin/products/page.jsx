@@ -38,6 +38,7 @@ const Page = () => {
           setDisplayProducts(res.products)
         }
     }
+
     getProducts()
 
   }, [])
@@ -52,7 +53,8 @@ const Page = () => {
       return ()=>{clearTimeout(timeOut)}
     }
 
-    return search();
+
+    search();
     
   }, [search])
 
