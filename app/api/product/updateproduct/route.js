@@ -26,54 +26,53 @@ export async function PUT( request){
         const id = searchParams.get("id");
 
         
-        const formData = await request.formData()
+        // const formData = await request.formData()
 
-        const title = formData.get("title");
-        const price = formData.get("price");
-        const width = formData.get("width");
-        const description = formData.get("description");
-        const height = formData.get("height");
-        const tag = formData.get("tag");
-        const stock = formData.get("stock");
-        const category = formData.get("category");
+        // const title = formData.get("title");
+        // const price = formData.get("price");
+        // const width = formData.get("width");
+        // const description = formData.get("description");
+        // const height = formData.get("height");
+        // const tag = formData.get("tag");
+        // const stock = formData.get("stock");
+        // const category = formData.get("category");
         
-        const slug = slugify(title.toLowerCase(), "-");
-
+        const data = await request.json()
         
-        let product = {title, slug, price, description, stock, width, height, tag, category }
+        // let product = {title, slug, price, description, stock, width, height, tag, category }
 
         // await productModel.create(newData);
 
-        const file = formData.get('image')
+        // const file = formData.get('image')
 
-        let image = ''
-        if( isStringObject(file) ){
-            const bytes = await file.arrayBuffer();
-            const buffer = Buffer.from(bytes)
-            const path = `./public/uploads/${file.name}`
-            await writeFile(path, buffer)
+        // let image = ''
+        // if( isStringObject(file) ){
+        //     const bytes = await file.arrayBuffer();
+        //     const buffer = Buffer.from(bytes)
+        //     const path = `./public/uploads/${file.name}`
+        //     await writeFile(path, buffer)
             
-            const result = await cloudinary.uploader.upload(path, {upload_preset: "bfurn_preset"}, (err, result)=>{
-                if(err){
-                    console.log(err)
-                }
-            })
+        //     const result = await cloudinary.uploader.upload(path, {upload_preset: "bfurn_preset"}, (err, result)=>{
+        //         if(err){
+        //             console.log(err)
+        //         }
+        //     })
             
-            fs.unlink(path, (err)=>{
-                if(err){
-                    console.log(err)
-                }
-            })
-            image = result.secure_url
-            product.image = image
-        }
+        //     fs.unlink(path, (err)=>{
+        //         if(err){
+        //             console.log(err)
+        //         }
+        //     })
+        //     image = result.secure_url
+        //     product.image = image
+        // }
             
 
 
 
 
-        await productModel.findByIdAndUpdate(id, {$set: {...product} })
-        product = await productModel.findById(id);
+        await productModel.findByIdAndUpdate(id, {$set: data })
+        const product = await productModel.findById(id);
         
         // await testModel.findByIdAndUpdate(id, {$set: {...product} })
         // product = await testModel.findById(id);

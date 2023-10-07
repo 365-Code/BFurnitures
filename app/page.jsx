@@ -8,8 +8,6 @@ import connectDB from '@/libs/db';
 export async function getData() {
 
   try{
-
-    // const result = await fetch(`/api/product/getproduct`)
     connectDB()
 
     const _featured = await productModel.find({tag: "featured"}).sort({updatedAt: -1})

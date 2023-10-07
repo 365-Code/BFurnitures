@@ -23,44 +23,45 @@ export async function POST( request ){
 
         connectDB();
 
-        const formData = await request.formData()
+        // const formData = await request.formData()
 
-        const title = formData.get("title");
-        const price = formData.get("price");
-        const width = formData.get("width");
-        const description = formData.get("description");
-        const height = formData.get("height");
-        const tag = formData.get("tag");
-        const stock = formData.get("stock");
-        const category = formData.get("category");
-        
-        const slug = slugify(title.toLowerCase(), "-");
+        // const title = formData.get("title");
+        // const price = formData.get("price");
+        // const width = formData.get("width");
+        // const description = formData.get("description");
+        // const height = formData.get("height");
+        // const tag = formData.get("tag");
+        // const stock = formData.get("stock");
+        // const category = formData.get("category");
+
+        const data = await request.json();
+        const slug = slugify(data.title.toLowerCase(), "-");
 
         // await productModel.create(newData);
 
-        const file = formData.get('image')
-        const bytes = await file.arrayBuffer();
-        const buffer = Buffer.from(bytes)
-        const path = `./public/uploads/${file.name}`
-        await writeFile(path, buffer)
+        // const file = formData.get('image')
+        // const bytes = await file.arrayBuffer();
+        // const buffer = Buffer.from(bytes)
+        // const path = `./public/uploads/${file.name}`
+        // await writeFile(path, buffer)
 
-        const result = await cloudinary.uploader.upload(path, {upload_preset: "bfurn_preset"}, (err, result)=>{
-            if(err){
-                console.log(err)
-            }
-        })
+        // const result = await cloudinary.uploader.upload(path, {upload_preset: "bfurn_preset"}, (err, result)=>{
+        //     if(err){
+        //         console.log(err)
+        //     }
+        // })
 
-        fs.unlink(path, (err)=>{
-            if(err){
-                console.log(err)
-            }
-        })
+        // fs.unlink(path, (err)=>{
+        //     if(err){
+        //         console.log(err)
+        //     }
+        // })
 
-        const image = result.secure_url;
+        // const image = result.secure_url;
 
-        let product = {title, image, slug, price, description, stock, width, height, tag, category }
+        // let product = {title, image, slug, price, description, stock, width, height, tag, category }
 
-        product = await productModel.create(product);
+        const product = await productModel.create({...data, slug});
         // await testModel.create(product);
 
         

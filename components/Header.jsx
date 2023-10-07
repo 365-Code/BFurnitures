@@ -8,16 +8,14 @@ import { MdAccountCircle, MdManageAccounts, MdLogout, MdMenu, MdClose } from 're
 import { FaBoxes } from 'react-icons/fa'
 import { useAuth } from '@/context/AuthState'
 import { usePathname, useRouter } from 'next/navigation'
-import Dropdown from './Dropdown'
 import { toast } from 'react-toastify'
 import { toastOptions } from '@/utils/utils'
+import Spinner from './Spinner'
 
 
 const Header = () => {
 
   const pathname = usePathname();
-  
-  const base = pathname.split('/',2)
 
   const ref = useRef();
   const router = useRouter();
@@ -37,7 +35,7 @@ const Header = () => {
     }
   }
 
-  const { auth, setAuth, clearAuth } = useAuth();
+  const { auth, setAuth, clearAuth, checkAdmin } = useAuth();
 
   const handleLogOut = () => {
     clearAuth()
@@ -45,26 +43,41 @@ const Header = () => {
     toast.success("Logged Out", toastOptions)
   }
 
+
+
   useEffect(() => {
     let data = localStorage.getItem('auth');
-
     
     if (data) {
       setAuth(JSON.parse(data));
       data = JSON.parse(data)
+      
+      if( pathname.startsWith("/admin") ){
+        const check = async ()=>{
+          const res = await checkAdmin(data?.token);
+          if(!res.access){
+            return (
+              <div className='flex text-center justify-center sm:p-4'>
+                <h1>{res.msg}</h1>
+                <Spinner/>
+              </div>
+            )
+          }
+        }
+        check()
+      }
 
-      // if( base[1] == "admin" && !data.role ){
-      //   router.push('/')
-      // }
       if( pathname == '/login' || pathname == '/register' ){
         router.push('/')
       } else{
         router.refresh()
       }
-    } else if( pathname.includes("admin") && !data ){
+    } else if( pathname.includes("admin") || pathname.includes("checkout") ){
       router.push('/')
     }
+    
   }, [])
+
 
   const handleMenu = (mode)=>{
     if(mode == "hide" || menu.mode == "visible")
@@ -76,7 +89,7 @@ const Header = () => {
 
   return (
     <>
-    { base[1] !== "admin" &&
+    { !pathname.startsWith('/admin') &&
     <header id='hdr'
       className="text-gray-600 relative body-font items-center w-full border bg-[#E7E7E7] ">
 
@@ -93,7 +106,7 @@ const Header = () => {
             <h1 className='logo font-semibold tracking-widest text-lg'>BFurnitures</h1>
           </Link>
         </div>
-        <div className={`transition-all ${menu.mode == "visible" && " z-40  bg-white/30 backdrop-blur-sm"} w-[80vw] h-screen sm:${()=>handleMenu} p-4 overflow-hidden sm:overflow-visible absolute sm:p-0 top-0 left-0 sm:w-auto sm:h-full sm:left-0 sm:top-0 sm:relative`}>
+        <div className={`transition-all ${menu.mode == "visible" && " z-[1] w-[80vw] h-screen bg-white/30 backdrop-blur-sm"} w-[100px] h-5 sm:${()=>handleMenu} p-4 absolute sm:p-0 top-0 left-0 sm:w-auto sm:h-full sm:left-0 sm:top-0 sm:relative`}>
           <button 
           className='sm:hidden block'
           onClick={handleMenu} 
@@ -111,7 +124,7 @@ const Header = () => {
             <Link onClick={()=>handleMenu("hide")} href={'/beds'} className=" mr-5 text-sm font-semibold hover:text-gray-900 uppercase">Beds</Link>
             <Link onClick={()=>handleMenu("hide")} href={'/sofas'} className="mr-5 text-sm font-semibold hover:text-gray-900 uppercase">Sofas</Link>
             <Link onClick={()=>handleMenu("hide")} href={'/tables'} className="mr-5 text-sm font-semibold hover:text-gray-900 uppercase">Tables</Link>
-            <Link onClick={()=>handleMenu("hide")} href={'/decoratives'} className="mr-5 text-sm font-semibold hover:text-gray-900 uppercase">Decoratives</Link>
+            <Link onClick={()=>handleMenu("hide")} href={'/decors'} className="mr-5 text-sm font-semibold hover:text-gray-900 uppercase">Decoratives</Link>
             <Link onClick={()=>handleMenu("hide")} href={'/search'} className="mr-5 text-sm font-semibold hover:text-gray-900 uppercase">Categories</Link>
           </nav>
         </div>

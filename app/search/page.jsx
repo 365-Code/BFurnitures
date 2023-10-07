@@ -43,6 +43,7 @@ const Page = () => {
     }, 1000)
 
     return ()=>(clearTimeout(timeOut))
+    
   }, [filter.search, filter.category])
 
   useEffect(()=>{

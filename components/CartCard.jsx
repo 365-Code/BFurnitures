@@ -35,13 +35,15 @@ const CartCard = ({item, description}) => {
 
 
   useEffect( ()=>{
-    const deBounce = setTimeout(()=>{
-      if(qty!==item.qty && qty>=1){
-        addToCart(item, qty);
-      }
+    const deBounce = ()=>{
+      const timeOut = setTimeout(()=>{
+        if(qty!==item.qty && qty>=1){
+          addToCart(item, qty);
+        }
       }, 1000);
-
-    return ()=>clearTimeout(deBounce);
+      return ()=>clearTimeout(timeOut);
+    }
+    return deBounce()
 
   }, [qty] )
 

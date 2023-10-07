@@ -11,7 +11,7 @@ const AdminSideBar = ({active}) => {
 
 
   return (
-    <div className='h-screen sm:w-[35%] md:w-[25%] bg-[#E7E7E7] p-6 space-y-4'>
+    <div className='h-screen md:w-[25%] bg-[#E7E7E7] p-2 md:p-6 space-y-4'>
 
         <div className='flex flex-col items-center gap-3'>
 

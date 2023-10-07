@@ -19,9 +19,11 @@ const SideCart = () => {
   
   useEffect(()=>{
     const data = localStorage.getItem("cart")
+    
     if(data){
       setCart(JSON.parse(data))
     }
+
   }, [])
 
   useEffect(()=>{

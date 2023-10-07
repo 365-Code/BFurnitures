@@ -10,7 +10,21 @@ const AuthState = ({children})=>{
         user: {},
         token: ''
     }
+
+
+
     const [auth, setAuth] = useState(noAuth)
+
+    const checkAdmin = async (token)=>{
+        const res = await fetch('/api/auth/checkAuth',{
+            headers:{
+              'Content-type': "application/json",
+              "auth-Token" : token
+            }
+          })
+          const response = await res.json()
+        return (response)
+    }
 
     const saveAuth = (user, token)=>{
 
@@ -25,7 +39,7 @@ const AuthState = ({children})=>{
     }
 
     return (
-        <AuthContext.Provider value={{auth, setAuth, saveAuth, clearAuth}}>
+        <AuthContext.Provider value={{auth, setAuth, saveAuth, clearAuth, checkAdmin}}>
             {children}
         </AuthContext.Provider>
     )

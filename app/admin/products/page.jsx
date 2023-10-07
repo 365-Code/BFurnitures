@@ -4,6 +4,8 @@ import { toastOptions } from '@/utils/utils'
 import React, { useEffect, useRef, useState } from 'react'
 import { MdAddBox, MdCancel, MdClose, MdDelete, MdEdit, MdPhotoCamera, MdSearch } from 'react-icons/md'
 import { toast } from 'react-toastify'
+import { CldUploadWidget } from 'next-cloudinary';
+
 
 const Page = () => {
 
@@ -24,18 +26,13 @@ const Page = () => {
   const [search, setSearch] = useState('');
   const [product, setProduct] = useState(initialProduct);
   const [displayProducts, setDisplayProducts] = useState([])
-  const [photo, setPhoto] = useState('');
-  
-  const ref = useRef();
+  const cloudRef = useRef();
 
 
   useEffect(() => {
     const getProducts = async () => {
-
         const result = await fetch(`/api/product/getproduct`)
-        
         const res = await result.json();
-
         if(res.success){
           setProducts(res.products)
           setDisplayProducts(res.products)
@@ -47,11 +44,15 @@ const Page = () => {
 
   useEffect(()=>{
     
-    const timeOut = setTimeout(()=>{
-      handleSearch();
-    }, 1000)
+    const search = ()=>{
+      const timeOut = setTimeout(()=>{
+        handleSearch();
+      }, 1000)
+      
+      return ()=>{clearTimeout(timeOut)}
+    }
 
-    return ()=>{clearTimeout(timeOut)}
+    return search();
     
   }, [search])
 
@@ -85,17 +86,17 @@ const Page = () => {
 
   const handleUpdate = async () => {
 
-    const formData = new FormData();
+    // const formData = new FormData();
 
-    formData.append('title', product.title)
-    formData.append('description', product.description)
-    formData.append('image', product.image)
-    formData.append('price', product.price)
-    formData.append('width', product.width)
-    formData.append('height', product.height)
-    formData.append('category', product.category)
-    formData.append('tag', product.tag)
-    formData.append('stock', product.stock)
+    // formData.append('title', product.title)
+    // formData.append('description', product.description)
+    // formData.append('image', product.image)
+    // formData.append('price', product.price)
+    // formData.append('width', product.width)
+    // formData.append('height', product.height)
+    // formData.append('category', product.category)
+    // formData.append('tag', product.tag)
+    // formData.append('stock', product.stock)
 
     if (updStatus.tag == "add") {
       const result = await fetch(`/api/product/addproduct`, {
@@ -103,8 +104,8 @@ const Page = () => {
         // headers: {
         //   "Content-Type": "application/json"
         // },
-        // body: JSON.stringify(product)
-        body: formData
+        body: JSON.stringify(product)
+        // body: formData
       })
       
       const res = await result.json();
@@ -113,8 +114,8 @@ const Page = () => {
       if(res.success){
         const newProduct = res.product
         toast.success(res.msg, toastOptions)
-        setProducts(([...products, newProduct ]))
-        setDisplayProducts([...products, newProduct])
+        setProducts(([newProduct, ...products ]))
+        setDisplayProducts([newProduct, ...products])
       }
 
       showProduct(false)
@@ -122,8 +123,8 @@ const Page = () => {
     } else {
       const result = await fetch(`/api/product/updateproduct/?id=${updStatus.item.id}`, {
         method: "PUT",
-        // body: JSON.stringify(product)
-        body: formData
+        body: JSON.stringify(product)
+        // body: formData
       })
 
       const res = await result.json();
@@ -185,8 +186,6 @@ const Page = () => {
         setUpdStatus({ status: true, tag: "add"})
       } else{
         setUpdStatus({ status: true, item: {id: item._id}, tag: "update"})
-        // delete itm['_id']
-        setPhoto(itm.image)
         setProduct(itm)
       }
     }
@@ -199,6 +198,38 @@ const Page = () => {
 
   return (
     <div className='flex'>
+
+      <div className='absolute'>
+      <CldUploadWidget
+        signatureEndpoint="/api/auth/cloudinarySign"
+        uploadPreset="bfurn_preset"
+        onUpload={(result, widget) => {
+          // console.log('SignedUpload:widget:upload', result);
+          const res = result?.info
+          setProduct({...product, image: res?.secure_url});
+          widget.close();
+        }}
+        onOpen={(widget) => {
+          // console.log('SignedUpload:widget:open', widget);
+        }}
+        onClose={(widget) => {
+          // console.log('SignedUpload:widget:close', widget);
+        }}
+      >
+        {({ open }) => {
+          function handleOnClick(e) {
+            setProduct({...product, image: undefined});
+            e.preventDefault();
+            open();
+          }
+          return (
+            <button ref={cloudRef} onClick={handleOnClick} />
+          );
+        }}
+      </CldUploadWidget>
+
+      </div>
+
       {
         delStatus.status &&
 
@@ -229,13 +260,13 @@ const Page = () => {
               <div className="flex flex-col sm:basis-[40%] gap-4">
                 <div className="relative w-full h-[60%]">
                   <img className="h-full w-full rounded-xl object-cover object-center"
-                    src={photo || product?.image}
+                    src={product?.image}
                     />
-                  <div onClick={() => { ref.current.click() }} className="cursor-pointer hover:text-[#ffffff] text-slate-800 p-4 absolute top-0 left-0 flex flex-col justify-center items-center w-full h-full bg-black/10">
+                  <div onClick={() => { cloudRef.current.click() }} className="cursor-pointer hover:text-[#ffffff] text-slate-800 p-4 absolute top-0 left-0 flex flex-col justify-center items-center w-full h-full bg-black/10">
                     <MdPhotoCamera size={"1.8em"} />
                     <p className='text-center text-sm'>Click to change photo</p>
                   </div>
-                  <input onChange={(e) => {setPhoto(URL.createObjectURL(e.target.files[0])); setProduct({...product, image: e.target.files[0]})}} type="file" className='hidden' ref={ref} />
+                  {/* <input onChange={(e) => {setPhoto(URL.createObjectURL(e.target.files[0])); setProduct({...product, image: e.target.files[0]})}} type="file" className='hidden' ref={ref} /> */}
                 </div>
 
                 <div className="w-full h-[40%]">
@@ -253,7 +284,7 @@ const Page = () => {
                 </div>
 
                 <div className="w-full border-b border-slate-500">
-                  <select name='category' value={product.category} onChange={handleChange} className="w-full rounded-sm border-none bg-[#ffffff] p-2 capitalize text-slate-600 outline-none" type="text" aria-placeholder="category">
+                  <select name='category' value={product.category} onChange={handleChange} className="w-full rounded-sm border-none bg-[#ffffff] p-2 capitalize text-slate-600 outline-none" type="text" placeholder="category">
                     <option className="hidden">category</option>
                     <option value="bed">bed</option>
                     <option value="chair">chair</option>
@@ -299,8 +330,8 @@ const Page = () => {
 
       <AdminSideBar active={"products"} />
 
-      <div className='p-6 sm:w-[65%] md:w-[75%] space-y-4'>
-        <div className='flex gap-4'>
+      <div className='p-6 text-center w-full md:w-[75%] space-y-4'>
+        <div className='flex flex-col-reverse md:flex-row gap-4'>
 
           <form onSubmit={(e)=>e.preventDefault()} className='flex items-center transition-all w-full bg-[#f5f6f5a1] hover:translate-y-1 hover:shadow-none shadow-xl font-semibold'>
             <input onChange={handleChange} name='search' value={search} className='p-2 w-full text-center gap-2' />
@@ -309,8 +340,15 @@ const Page = () => {
             </button>
           </form>
 
-          <button onClick={() => { showProduct("add") }} className='p-3 transition-all bg-[#f5f6f5a1] hover:bg-slate-400 font-semibold uppercase text-center flex justify-center w-1/2 items-center gap-2'>add product<MdAddBox size={"1.3em"} /></button>
+          <button 
+          className='p-3 transition-all bg-[#f5f6f5a1] hover:bg-slate-400 font-semibold uppercase text-center flex justify-center w-full md:w-1/2 items-center gap-2'
+          onClick={() => { showProduct("add") }}>
+            add product<MdAddBox size={"1.3em"} />
+          </button>
+          
+
         </div>
+        <>
         {
             displayProducts?.length
             ?
@@ -363,6 +401,7 @@ const Page = () => {
         :
         <h1 className='text-center py-12 text-3xl font-semibold text-slate-800'>No Product Found</h1>
       }
+        </>
       </div>
 
     </div>

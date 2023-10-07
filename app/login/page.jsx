@@ -3,7 +3,7 @@ import { useAuth } from '@/context/AuthState'
 import { toastOptions } from '@/utils/utils'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { FaUser, FaUserPlus, FaLock } from 'react-icons/fa'
 import { toast } from 'react-toastify'
 const Page = () => {
@@ -11,7 +11,7 @@ const Page = () => {
 
   const router = useRouter();
 
-  const {setAuth, saveAuth} = useAuth();
+  const {saveAuth} = useAuth();
 
   const [userDetails, setUserDetails] = useState({
     email: '',

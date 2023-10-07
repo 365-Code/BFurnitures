@@ -36,7 +36,13 @@ const Page = () => {
       const res = await result.json();
   
   
-      setUser({...user,...(auth.user), ...(res.shipping)});
+      setUser((u)=>{
+        return {
+          ...user,
+          ...(auth.user), 
+          ...(res.shipping)
+        }
+      });
   
     }
 
