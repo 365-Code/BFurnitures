@@ -25,6 +25,7 @@ const Page = () => {
   const [updStatus, setUpdStatus] = useState({ status: false, item: {}, tag: "" })
   const [search, setSearch] = useState('');
   const [product, setProduct] = useState(initialProduct);
+  const [categories, setCategories] = useState([]);
   const [displayProducts, setDisplayProducts] = useState([])
   const cloudRef = useRef();
 
@@ -39,7 +40,16 @@ const Page = () => {
         }
     }
 
+    const getCategories = async () => {
+      const result = await fetch(`/api/category/getcategory`)
+      const res = await result.json();
+      if(res.success){
+        setCategories(res.categories)
+      }
+  }
+
     getProducts()
+    getCategories()
 
   }, [])
 
@@ -251,27 +261,27 @@ const Page = () => {
       }
       {
         updStatus.status &&
-          <div className="absolute top-0 left-0 flex min-h-screen w-screen items-center justify-center bg-black/10 backdrop-blur-sm">
-            <div className="flex sm:flex-row flex-col rounded-lg max-h-[90%] max-w-[800px] bg-[#f5f6f5] h-[430px] p-8 gap-4">
+          <div className="absolute z-[5] top-0 left-0 flex min-h-screen h-full w-screen items-center justify-center bg-black/10 backdrop-blur-sm">
+            <div className="flex sm:flex-row flex-col rounded-lg max-w-[800px] bg-[#f5f6f5] h-fit p-8 gap-4">
               <button
-                onClick={() => setUpdStatus({ status: false, item: {} })}
+                onClick={() => showProduct()}
                 className="absolute text-slate-50 right-[3%] top-[3%] hover:bg-slate-50 hover:text-slate-700 cursor-pointer rounded-full border p-2">
                 <MdClose />
               </button>
 
-              <div className="flex flex-col sm:basis-[40%] gap-4">
-                <div className="relative w-full h-[60%]">
+              <div className="flex flex-col basis-full sm:basis-[40%] gap-4">
+                <div className="relative w-full min-h-[30px] sm:h-[60%]">
                   <img className="h-full w-full rounded-xl object-cover object-center"
                     src={product?.image}
                     />
                   <div onClick={() => { cloudRef.current.click() }} className="cursor-pointer hover:text-[#ffffff] text-slate-800 p-4 absolute top-0 left-0 flex flex-col justify-center items-center w-full h-full bg-black/10">
-                    <MdPhotoCamera size={"1.8em"} />
+                    <MdPhotoCamera className='hidden sm:block' size={"1.8em"} />
                     <p className='text-center text-sm'>Click to change photo</p>
                   </div>
                   {/* <input onChange={(e) => {setPhoto(URL.createObjectURL(e.target.files[0])); setProduct({...product, image: e.target.files[0]})}} type="file" className='hidden' ref={ref} /> */}
                 </div>
 
-                <div className="w-full h-[40%]">
+                <div className="w-full h-full sm:h-[40%]">
                   <textarea name='description' value={product.description} onChange={handleChange} placeholder="Product Description"
                     className="custom-scrollbar bg-[#ffffff] h-full w-full resize-none rounded-xl p-2 text-slate-600 outline-none"></textarea>
                 </div>
@@ -288,11 +298,7 @@ const Page = () => {
                 <div className="w-full border-b border-slate-500">
                   <select name='category' value={product.category} onChange={handleChange} className="w-full rounded-sm border-none bg-[#ffffff] p-2 capitalize text-slate-600 outline-none" type="text" placeholder="category">
                     <option className="hidden">category</option>
-                    <option value="bed">bed</option>
-                    <option value="chair">chair</option>
-                    <option value="table">table</option>
-                    <option value="decors">decors</option>
-                    <option value="sofas">sofas</option>
+                    {categories?.map((c)=>(<option key={c._id} value={c.category}>{c.category}</option>))}
                   </select>
                 </div>
 

@@ -74,7 +74,7 @@ const Page = () => {
 
   useEffect(()=>{
     const getCategories = async ()=>{
-      const result = await fetch(`/api/category`);
+      const result = await fetch(`/api/category/getcategory`);
 
       const res = await result.json();
 
