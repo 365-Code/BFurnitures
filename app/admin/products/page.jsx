@@ -354,13 +354,14 @@ const Page = () => {
         {
             displayProducts?.length
             ?
-        <div className='grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4'>
+        <div className='w-full grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4'>
 
             {
             displayProducts?.map((item) => {
               return (
-                  <div key={item._id} className='justify-self-center custom-shadow mb-8 border rounded-t-lg overflow-hidden flex flex-col justify-between max-w-full max-h-[440px]
-                          w-[300px] min-h-[350px]
+                  <div key={item._id} className='justify-self-center custom-shadow mb-8 border rounded-t-lg overflow-hidden flex flex-col justify-between 
+                          max-w-full max-h-[440px]
+                          w-[400px] min-h-[350px]
                           sm:w-[300px] sm:min-h-[350px]'>
                     <div className='overflow-hidden w-full h-[280px] rounded-t-lg cursor-pointer'>
                       <img
