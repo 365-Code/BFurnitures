@@ -1,50 +1,61 @@
+"use client"
 import AdminSideBar from "@/components/AdminSideBar";
-import connectDB from "@/libs/db";
-import deliveryModel from "@/models/deliveryModel";
-import userModel from "@/models/userModel";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 
-export async function getData(){
+// export async function getData(){
 
-  try{
+//   try{
 
-    connectDB();
+//     connectDB();
 
-    const u = await userModel.find({}).select("name email");
+//     const u = await userModel.find({}).select("name email");
 
     
-    const us = JSON.parse(JSON.stringify(u));
+//     const us = JSON.parse(JSON.stringify(u));
     
-    var users = [];
+//     var users = [];
 
-    for (let index = 0; index < us.length; index++) {
-      const e = us[index];
-      const d = await deliveryModel.findOne({uId: e._id}).select("-uId");
-      const details = {name: e.name, email: e.email, ...(d)};
-      users = [details, ...users];
+//     for (let index = 0; index < us.length; index++) {
+//       const e = us[index];
+//       const d = await deliveryModel.findOne({uId: e._id}).select("-uId");
+//       const details = {name: e.name, email: e.email, ...(d)};
+//       users = [details, ...users];
+//     }
+    
+//     return {
+//       users
+//     }
+
+//   }catch(err){
+//     console.log(err)
+//     return null
+//   }
+// }
+
+const Page = () => {
+
+  // const data = await getData()
+
+  // if(!data){return null}
+
+  // const {users} = data
+  const [users, setUsers] = useState(null);
+
+  useEffect(()=>{
+    const getUsers = async ()=>{
+        const result = await fetch('/api/user/getUsers');
+        const res= await result.json();
+        // console.log(res)
+        if(res.success){
+          setUsers(res.users)
+        }
+
     }
-    
-    return {
-      users
-    }
 
-  }catch(err){
-    console.log(err)
-    return null
-  }
+    getUsers();
 
-
-
-}
-
-const Page = async () => {
-
-  const data = await getData()
-
-  if(!data){return null}
-
-  const {users} = data
+  }, [])
 
   return (
     <div className="flex">
@@ -71,10 +82,10 @@ const Page = async () => {
                   <div key={i} className="hover:bg-slate-300 flex gap-2 rounded-lg bg-[#fefefe] p-2">
                     <p className="font-bold">{i+1}</p>
                     <div className="grid w-full grid-rows-4 gap-2 break-words text-left sm:grid-cols-4 sm:grid-rows-1">
-                      <p>{u.name}</p>
-                      <p>{u.email}</p>
-                      <p>{u.phone || "phone"}</p>
-                      <p>{u.address || "Address, pincode, City, State"}</p>
+                      <p>{u?.name}</p>
+                      <p>{u?.email}</p>
+                      <p>{u?.phone || "phone"}</p>
+                      <p>{ u?.address ? `${u?.pincode} ${u?.address} ${u?.city} ${u?.state}` : "Pincode, Address, City, State"}</p>
                     </div>
                   </div>
                 )

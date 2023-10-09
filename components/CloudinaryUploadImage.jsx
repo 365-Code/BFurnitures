@@ -16,15 +16,15 @@ const CloudinaryUploadImage = () => {
         signatureEndpoint="/api/auth/cloudinarySign"
         uploadPreset="bfurn_preset"
         onUpload={(result, widget) => {
-          console.log('SignedUpload:widget:upload', result);
+          // console.log('SignedUpload:widget:upload', result);
           setResource(result?.info);
           widget.close();
         }}
         onOpen={(widget) => {
-          console.log('SignedUpload:widget:open', widget);
+          // console.log('SignedUpload:widget:open', widget);
         }}
         onClose={(widget) => {
-          console.log('SignedUpload:widget:close', widget);
+          // console.log('SignedUpload:widget:close', widget);
         }}
       >
         {({ open }) => {

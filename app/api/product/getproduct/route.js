@@ -14,8 +14,8 @@ export async function GET( request ){
 
         return NextResponse.json( {success: true, msg: "Products Fetched Successfully", products});
     } catch (err){
-        console.log(err)
-        return NextResponse.json({success: false, msg: "Error Fetching Products"})
+        // console.log(err)
+        return NextResponse.json({success: false, msg: err})
     }
 
 }

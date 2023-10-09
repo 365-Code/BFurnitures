@@ -24,7 +24,7 @@ export async function GET(request) {
       { status: 200 }
     );
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     return NextResponse.json(
       { msg: 'Check Auth Error', access: 0 },
       { status: 500 }

@@ -11,38 +11,29 @@ const Page = () => {
   const [user, setUser] = useState(
     {
       avatar : 
-      // 'https://img.freepik.com/premium-photo/portrait-happy-with-beaming-smile-freelancer-gray-jacket-standing-with-crossed-hands-against_908985-9327.jpg?w=826',
-      'https://img.freepik.com/premium-photo/man-with-beard-wearing-gray-sweater_873925-16110.jpg?w=900'
-      ,
+      'https://img.freepik.com/premium-photo/man-with-beard-wearing-gray-sweater_873925-16110.jpg?w=900',
       _id: '',
-      name: "Your Name",
-      email : "Your Email",
-      state: 'Your State',
-      city : 'Your City',
-      address : 'Your House Address',
-      pincode : 'pincode',
+      name: "",
+      email : "",
+      state: '',
+      city : '',
+      address : '',
+      pincode : '',
       phone: ''
     });
 
   const {auth} = useAuth();
 
-  
-
   useEffect(()=>{
 
     const getDelivery = async ()=>{
-      const result = await fetch(`/api/delivery?uId=${auth?.user._id}`)
+
+      const result = await fetch(`/api/delivery/getDelivery?uId=${auth?.user._id}`)
   
       const res = await result.json();
-  
-  
-      setUser((u)=>{
-        return {
-          ...user,
-          ...(auth.user), 
-          ...(res.shipping)
-        }
-      });
+
+      const us = {...user, ...(auth.user), ...(res.shipping)}
+      setUser(us)
   
     }
 
@@ -54,9 +45,7 @@ const Page = () => {
 
 
   return (
-    <div className="sm:h-[90vh] p-2 flex justify-center items-center w-screen relative bg-[#E7E7E7]">
-
-      {edit == "editModeOn" && <EditProfile userDet={user} setUserDet={setUser} setVisible={setEdit} />}
+    <div className="sm:h-[90vh] p-2 flex justify-center relative items-center w-screen bg-[#E7E7E7]">
 
       <div className="flex flex-col sm:flex-row justify-between gap-2 
                     w-[90%] h-[80%]
@@ -75,13 +64,13 @@ const Page = () => {
               />
             </div>
 
-            <h2 className="text-2xl font-semibold">{auth?.user.name}</h2>
+            <h2 className="text-2xl font-semibold">{auth?.user.name || "UserName"}</h2>
 
           </div>
           <div className="text-sm space-y-3 ">
-            <p className='flex items-center gap-2'><MdLocationPin size={"1.4em"} />{user.state}, {user.city}</p>
-            <p className='flex items-center gap-2'><MdEmail size={"1.4em"} />{user.email}</p>
-            <p className='flex items-center gap-2'><MdSmartphone size={"1.4em"} />+91 {user.phone}</p>
+            <p className='flex items-center gap-2'><MdLocationPin size={"1.4em"} className='text-yellow-400'/>{user.state || "Your State"}, {user.city || "Your City"}</p>
+            <p className='flex items-center gap-2'><MdEmail size={"1.4em"} className='text-red-200'/>{user.email || "Your Email"}</p>
+            <p className='flex items-center gap-2'><MdSmartphone size={"1.4em"} className='text-slate-900'/>+91 {user.phone || "Your Phone"}</p>
           </div>
 
         </div>
@@ -93,28 +82,28 @@ const Page = () => {
             <div className="flex justify-between items-center mb-2">
               <h3 className="text-lg font-semibold">Shipping Address</h3>
               <button
-                className='transition-all rotate-0 hover:rotate-[360deg]'
+                className='transition-all rotate-0 text-blue-500 hover:rotate-[360deg]'
                 onClick={() => (setEdit("editModeOn"))}><MdEdit size={"1.4em"} />
                 </button>
             </div>
             <div className="flex justify-between">
               <p>Address</p>
-              <h3 className="font-semibold">{user.address}</h3>
+              <h3 className="font-semibold">{user.address || "Your Address"}</h3>
             </div>
 
             <div className="flex justify-between">
               <p>City</p>
-              <h3 className="font-semibold">{user.city}</h3>
+              <h3 className="font-semibold">{user.city || "Your City"}</h3>
             </div>
 
             <div className="flex justify-between">
               <p>Country</p>
-              <h3 className="font-semibold">{user.state}</h3>
+              <h3 className="font-semibold">{user.state || "Your State"}</h3>
             </div>
 
             <div className="flex justify-between">
               <p>Zipcode</p>
-              <h3 className="font-semibold">{user.pincode}</h3>
+              <h3 className="font-semibold">{user.pincode || "Your Pincode"}</h3>
             </div>
 
           </div>
@@ -125,7 +114,7 @@ const Page = () => {
               href={'/orders'}
               className="group/orders cursor-pointer bg-slate-50 basis-1/2 p-4 rounded-lg">
               <div className='flex justify-between items-center'>
-                <h3 className='flex items-center gap-2'>Orders<span><BsBoxFill /></span></h3>
+                <h3 className='flex items-center gap-2'>Orders<span>< BsBoxFill className='text-indigo-500'/></span></h3>
                 <span className='group-hover/orders:translate-x-2 transition-all'><MdArrowForwardIos /></span>
               </div>
               <p className='group-hover/orders:underline'>Track your orders here</p>
@@ -135,7 +124,7 @@ const Page = () => {
               href={'/wishlist'}
               className="group/wishlist cursor-pointer bg-slate-50 basis-1/2 p-4 rounded-lg">
               <div className='flex justify-between items-center'>
-                <h3 className='flex items-center gap-2'>Wishlist<span><BsFillHeartFill /></span></h3>
+                <h3 className='flex items-center gap-2'>Wishlist<span>< BsFillHeartFill className='text-rose-600'/></span></h3>
                 <span className='group-hover/wishlist:translate-x-2 transition-all'><MdArrowForwardIos /></span>
               </div>
               <p className='group-hover/wishlist:underline'>Your Wishlist are here</p>
@@ -145,9 +134,10 @@ const Page = () => {
 
         </div>
 
-
-
       </div>
+
+      {edit == "editModeOn" && <EditProfile userDet={user} setUserDet={setUser} setVisible={setEdit} />}
+
 
 
     </div>

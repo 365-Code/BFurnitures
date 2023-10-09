@@ -27,8 +27,8 @@ export async function GET(request){
     return NextResponse.json({success:true, product})
         
     } catch (err){
-        console.log(err);
-        return NextResponse.json({success: false, msg: "Error in get single product"}, {status: 500})
+        // console.log(err);
+        return NextResponse.json({success: false, msg: err}, {status: 500})
     }
 
 }

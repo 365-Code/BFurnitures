@@ -22,7 +22,6 @@ export async function getData() {
       trending
     }
   } catch(err){
-    console.log(err)
     return null
   }
 }

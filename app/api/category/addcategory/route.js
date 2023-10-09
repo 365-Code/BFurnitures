@@ -21,7 +21,7 @@ export async function POST(request){
         return NextResponse.json({success: true, newCategory})
 
     } catch (err){
-        console.log(err)
-        return NextResponse.json({success: false}, {status: 500})
+        // console.log(err)
+        return NextResponse.json({success: false, msg: err}, {status: 500})
     }
 }

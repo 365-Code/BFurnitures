@@ -55,7 +55,7 @@ const Header = () => {
       if( pathname.startsWith("/admin") ){
         const check = async ()=>{
           const res = await checkAdmin(data?.token);
-          console.log(res)
+          // console.log(res)
           if(!res.access){
             router.push("/permission")
           }

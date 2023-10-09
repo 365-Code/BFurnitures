@@ -18,7 +18,7 @@ export async function DELETE( request){
         return NextResponse.json({success: true, msg: "Deleted Successfully"});
 
     } catch (err){
-        console.log(err);
-        return NextResponse.json({success: false, msg: "Error in Delete Product"})
+        // console.log(err);
+        return NextResponse.json({success: false, msg: err})
     }
 }

@@ -1,16 +1,29 @@
-import { NextRequest, NextResponse } from "next/server"
+import { NextResponse } from "next/server"
 
-export async function GET( request ) {
-
-  return NextResponse.json([123123,123123,123123])
-    // Handle any other HTTP method
+const pincodes = {
+  ['341505']:
+  {
+    pin: '341505',
+    state: "Rajasthan",
+    city: "Makrana"
   }
-
-
-  export async function POST( req, res ) {
-
-    console.log(NextRequest)
   
-    return NextResponse.json([123123,123123,123123])
-      // Handle any other HTTP method
+}
+
+export async function GET( req ) {
+
+    try{
+
+      const pins = await req.headers;
+      const pin = pins.get('pin')
+
+      const addr = pincodes[pin]
+       
+      return NextResponse.json({success: true, address: addr })
+
+    } catch (err){
+      console.log(err)
+        return NextResponse.json({success: false, msg: err})
+
     }
+}

@@ -28,7 +28,6 @@ async function getServerSideProps(category){
         }
 
     }catch(err){
-        console.log(err)
         return {
             items: null
         }

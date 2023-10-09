@@ -69,8 +69,8 @@ export async function POST( request ){
         return NextResponse.json({ success: true, msg: "Product Added Successfully", product});
 
     } catch (err){
-        console.log(err);
-        return NextResponse.json({success: false, msg: "Error in Add product"}, {status: 500})
+        // console.log(err);
+        return NextResponse.json({success: false, msg: err}, {status: 500})
     }
 
 

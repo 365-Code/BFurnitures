@@ -8,7 +8,8 @@ const connectDB = async () => {
 
         await mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true});
     } catch (err){
-        console.log(`Errror in db: ${err}`);
+        // console.log(`Errror in db: ${err}`);
+        return null
     }
 
   };

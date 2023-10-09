@@ -25,7 +25,7 @@ export async function POST(request){
         return NextResponse.json({success: true, msg: "Registered Successfully"}, {status: 200})
 
     } catch(err){
-        console.log(err)
+        // console.log(err)
         return NextResponse.json({success: false, msg: err}, {status: 500})
     }
 
