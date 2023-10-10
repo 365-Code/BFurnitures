@@ -77,7 +77,7 @@ const Header = () => {
     if(mode == "hide" || menu.mode == "visible")
       setMenu({mode: "hidden", position:"-translate-x-[150%]"})
     else
-      setMenu({mode: "visible", position:"translate-x-0 top-12"})
+      setMenu({mode: "visible", position:"translate-x-0"})
   }
 
 
@@ -114,7 +114,7 @@ const Header = () => {
             }
           </button>
           <nav
-            className={`${menu.position} gap-2 sm:gap-0 sm:translate-x-0 sm:top-0 transition-all flex flex-col absolute flex-wrap items-start sm:items-center gap-x-4 text-base sm:flex md:ml-auto md:mr-auto sm:relative sm:flex-row`}>
+            className={`${menu.position} top-12 gap-2 sm:gap-0 sm:translate-x-0 sm:top-0 transition-all flex flex-col absolute flex-wrap items-start sm:items-center gap-x-4 text-base sm:flex md:ml-auto md:mr-auto sm:relative sm:flex-row`}>
             <Link onClick={()=>handleMenu("hide")} href={'/beds'} className=" mr-5 text-sm font-semibold hover:text-gray-900 uppercase">Beds</Link>
             <Link onClick={()=>handleMenu("hide")} href={'/sofas'} className="mr-5 text-sm font-semibold hover:text-gray-900 uppercase">Sofas</Link>
             <Link onClick={()=>handleMenu("hide")} href={'/tables'} className="mr-5 text-sm font-semibold hover:text-gray-900 uppercase">Tables</Link>
