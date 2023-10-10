@@ -28,7 +28,7 @@ export async function POST(request){
             id: existingUser._id
         }
 
-        const token = jwt.sign( data, process.env.JWT_SECRET )
+        const token = jwt.sign( data, process.env.JWT_SECRET, {expiresIn : "1d"} )
         
         const u = await userModel.findById(existingUser._id).select("name email")
 

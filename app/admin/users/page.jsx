@@ -93,36 +93,6 @@ const Page = () => {
               })
             }
 
-            <div className="hover:bg-slate-300 flex gap-2 rounded-lg bg-[#fefefe] p-2">
-              <p className="font-bold">2</p>
-              <div className="grid w-full grid-rows-4 gap-2 break-words text-left sm:grid-cols-4 sm:grid-rows-1">
-                <p>Smitha Pearson</p>
-                <p>SmithaPearson@email.com</p>
-                <p>8978675645</p>
-                <p>Chicago, Williams, kingsman 1987</p>
-              </div>
-            </div>
-
-            <div className="hover:bg-slate-300 flex gap-2 rounded-lg bg-[#fefefe] p-2">
-              <p className="font-bold">3</p>
-              <div className="grid w-full grid-rows-4 gap-2 break-words text-left sm:grid-cols-4 sm:grid-rows-1">
-                <p>John Doe</p>
-                <p>JohnDoe@email.com</p>
-                <p>8978675645</p>
-                <p>Washington DC, lucamia, kingsman 1987</p>
-              </div>
-            </div>
-
-            <div className="hover:bg-slate-300 flex gap-2 rounded-lg bg-[#fefefe] p-2">
-              <p className="font-bold">4</p>
-              <div className="grid w-full grid-rows-4 gap-2 break-words text-left sm:grid-cols-4 sm:grid-rows-1">
-                <p>Jacob Andersan</p>
-                <p>JacobAndersan@email.com</p>
-                <p>8978675645</p>
-                <p>New York, Manhattan, kingsman 1987</p>
-              </div>
-            </div>
-
           </div>
         </div>
       </div>
