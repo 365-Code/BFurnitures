@@ -10,8 +10,7 @@ const Page = () => {
   const [edit, setEdit] = useState('editModeOff')
   const [user, setUser] = useState(
     {
-      avatar : 
-      'https://img.freepik.com/premium-photo/man-with-beard-wearing-gray-sweater_873925-16110.jpg?w=900',
+      avatar : 'https://img.freepik.com/premium-photo/man-with-beard-wearing-gray-sweater_873925-16110.jpg?w=900',
       _id: '',
       name: "",
       email : "",
@@ -27,13 +26,17 @@ const Page = () => {
   useEffect(()=>{
 
     const getDelivery = async ()=>{
-
-      const result = await fetch(`/api/delivery/getDelivery?uId=${auth?.user._id}`)
+      
+      // console.log(auth.user._id)
+      const result = await fetch(`/api/delivery/getDelivery?uId=${auth.user._id}`)
   
       const res = await result.json();
 
-      const us = {...user, ...(auth.user), ...(res.shipping)}
-      setUser(us)
+      if(res.success){
+        const us = {...user, ...(auth.user), ...(res.shipping)}
+        // console.log(us);
+        setUser(us)
+      }
   
     }
 
@@ -59,18 +62,18 @@ const Page = () => {
                 className="h-full w-full object-center object-cover"
                 // src="https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg?w=740&t=st=1694527348~exp=1694527948~hmac=86c5ae0d7ad78a6104a440db4d6971233e98e58a01b92304441f1e506a64bda6" alt=""
                 // src="https://img.freepik.com/premium-photo/photo-businesswoman_889227-37077.jpg?w=740"
-                src={user.avatar}
+                src={user?.avatar}
                 alt='avatar'
               />
             </div>
 
-            <h2 className="text-2xl font-semibold">{auth?.user.name || "UserName"}</h2>
+            <h2 className="text-2xl font-semibold">{user?.name || "UserName"}</h2>
 
           </div>
           <div className="text-sm space-y-3 ">
-            <p className='flex items-center gap-2'><MdLocationPin size={"1.4em"} className='text-yellow-400'/>{user.state || "Your State"}, {user.city || "Your City"}</p>
-            <p className='flex items-center gap-2'><MdEmail size={"1.4em"} className='text-red-200'/>{user.email || "Your Email"}</p>
-            <p className='flex items-center gap-2'><MdSmartphone size={"1.4em"} className='text-slate-900'/>+91 {user.phone || "Your Phone"}</p>
+            <p className='flex items-center gap-2'><MdLocationPin size={"1.4em"} className='text-yellow-400'/>{user?.state || "Your State"}, {user.city || "Your City"}</p>
+            <p className='flex items-center gap-2'><MdEmail size={"1.4em"} className='text-red-200'/>{user?.email || "Your Email"}</p>
+            <p className='flex items-center gap-2'><MdSmartphone size={"1.4em"} className='text-slate-900'/>+91 {user?.phone || "Your Phone"}</p>
           </div>
 
         </div>
@@ -88,22 +91,22 @@ const Page = () => {
             </div>
             <div className="flex justify-between">
               <p>Address</p>
-              <h3 className="font-semibold">{user.address || "Your Address"}</h3>
+              <h3 className="font-semibold">{user?.address || "Your Address"}</h3>
             </div>
 
             <div className="flex justify-between">
               <p>City</p>
-              <h3 className="font-semibold">{user.city || "Your City"}</h3>
+              <h3 className="font-semibold">{user?.city || "Your City"}</h3>
             </div>
 
             <div className="flex justify-between">
               <p>Country</p>
-              <h3 className="font-semibold">{user.state || "Your State"}</h3>
+              <h3 className="font-semibold">{user?.state || "Your State"}</h3>
             </div>
 
             <div className="flex justify-between">
               <p>Zipcode</p>
-              <h3 className="font-semibold">{user.pincode || "Your Pincode"}</h3>
+              <h3 className="font-semibold">{user?.pincode || "Your Pincode"}</h3>
             </div>
 
           </div>
