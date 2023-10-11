@@ -63,7 +63,7 @@ const SideCart = () => {
   </div>
 
   <div className='flex h-[10%] p-4 justify-center items-center font-semibold bg-[#daddc7]'>
-    <p>SubTotal : ${subTotal}</p>
+    <p>SubTotal : ₹{subTotal}</p>
   </div>
 
     <div className='h-[10%] flex'>
