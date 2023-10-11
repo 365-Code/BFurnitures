@@ -110,29 +110,29 @@ const Page = () => {
       <h2>Order Summary</h2>
       <div className="flex items-center justify-between">
         <p>Subtotal</p>
-        <p>$2312.00</p>
+        <p>₹2312.00</p>
       </div>
 
       <div className="flex items-center justify-between text-sm text-slate-400">
         <p>Discount</p>
-        <p>(20%) - $1109.40</p>
+        <p>(20%) - ₹1109.40</p>
       </div>
 
       <div className="flex items-center justify-between text-sm text-slate-400">
         <p>Delivery</p>
-        <p>$0.00</p>
+        <p>₹0.00</p>
       </div>
 
       <div className="flex items-center justify-between text-sm text-slate-400">
         <p>Tax</p>
-        <p>+ 2312.00</p>
+        <p>+2312.00</p>
       </div>
 
       <hr className="border border-dashed" />
 
       <div className="flex items-center justify-between">
         <p className="text-lg">Total</p>
-        <p>+ 2312.00</p>
+        <p>+2312.00</p>
       </div>
     </div>
   </div>

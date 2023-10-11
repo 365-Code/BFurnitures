@@ -114,7 +114,7 @@ const ProductPageCard = ({ slug }) => {
                   </div>
                 </div>
 
-                <p className="text-lg font-bold text-slate-800">${item?.price}</p>
+                <p className="text-lg font-bold text-slate-800">₹{item?.price}</p>
 
                 <div className="flex gap-1">
                   <button onClick={()=>handleQty(-1)} className="flex h-[32px] w-[32px] items-center justify-center rounded-lg border border-black p-2 text-4xl "><AiOutlineMinus /></button>

@@ -23,7 +23,7 @@ const OrderCard = ({item}) => {
       </div>
 
       <div>
-        <h3 className="text-lg">${item.price}</h3>
+        <h3 className="text-lg">₹{item.price}</h3>
         <p className="text-right sm:text-base text-sm text-slate-400">Qty: {item.qty}</p>
       </div>
     </div>

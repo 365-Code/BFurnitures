@@ -79,7 +79,7 @@ const Page = () => {
                     <div>
                         <h5 className="text-xl text-gray-600 text-center">Global Activities</h5>
                         <div className="mt-2 flex justify-center gap-4">
-                            <h3 className="text-3xl font-bold text-gray-700">$23,988</h3>
+                            <h3 className="text-3xl font-bold text-gray-700">₹23,988</h3>
                             <div className="flex items-end gap-1 text-green-500">
                                 <svg className="w-3" viewBox="0 0 12 15" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M6.00001 0L12 8H-3.05176e-05L6.00001 0Z" fill="currentColor"/>
@@ -87,7 +87,7 @@ const Page = () => {
                                 <span>2%</span>
                             </div>
                         </div>
-                        <span className="block text-center text-gray-500">Compared to last week $13,988</span>
+                        <span className="block text-center text-gray-500">Compared to last week ₹13,988</span>
                     </div>
                     <table className="w-full text-gray-600">
                         <tbody>
@@ -157,7 +157,7 @@ const Page = () => {
                     <h5 className="text-xl text-gray-700">Downloads</h5>
                     <div className="my-8">
                         <h1 className="text-5xl font-bold text-gray-800">64,5%</h1>
-                        <span className="text-gray-500">Compared to last week $13,988</span>
+                        <span className="text-gray-500">Compared to last week ₹13,988</span>
                     </div>
                     <svg className="w-full" viewBox="0 0 218 69" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0 67.5C27.8998 67.5 24.6002 15 52.5 15C80.3998 15 77.1002 29 105 29C132.9 29 128.6 52 156.5 52C184.4 52 189.127 63.8158 217.027 63.8158" stroke="url(#paint0_linear_622:13664)" strokeWidth="3" strokeLinecap="round"/>

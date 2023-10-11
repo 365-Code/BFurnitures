@@ -65,7 +65,7 @@ const CartCard = ({item, description}) => {
       href={`/products/${item.slug}`} 
       className="text-sm font-semibold">
         <p className='text-lg'>{item?.title} </p>
-        <p className="text-[#FD8D14] text-sm">{item?.price}</p>
+        <p className="text-[#FD8D14] text-sm">₹{item?.price}</p>
       </Link>
       
       {

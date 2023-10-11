@@ -292,7 +292,7 @@ const Page = () => {
                   <input name='title' value={product.title} onChange={handleChange} placeholder="Product Name" className="w-full rounded-sm border-none bg-[#ffffff] p-2 text-slate-600 outline-none py-3" type="text" />
                 </div>
                 <div className="w-full border-b border-slate-500">
-                  <input name='price' value={product.price} onChange={handleChange} placeholder="$ Price" className="w-full rounded-sm border-none bg-[#ffffff] p-2 text-slate-600 outline-none" type="text" />
+                  <input name='price' value={product.price} onChange={handleChange} placeholder="₹ Price" className="w-full rounded-sm border-none bg-[#ffffff] p-2 text-slate-600 outline-none" type="text" />
                 </div>
 
                 <div className="w-full border-b border-slate-500">
@@ -380,7 +380,7 @@ const Page = () => {
 
                       <div>
                         <p className='text-lg sm:text-base text-slate-800 font-semibold tracking-normal'>{item?.title}</p>
-                        <p className='text-base sm:text-sm text-slate-500 font-semibold'>${item?.price}</p>
+                        <p className='text-base sm:text-sm text-slate-500 font-semibold'>₹{item?.price}</p>
                       </div>
 
                       <div className='flex gap-2 sm:text-lg md:text-xl font-bold'>

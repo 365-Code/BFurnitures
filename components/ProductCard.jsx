@@ -50,7 +50,7 @@ const ProductCard = ({item}) => {
         <div className=' flex items-center justify-between py-2'>
             <div>
                 <p className='text-lg sm:text-base text-slate-800 font-semibold tracking-normal'>{item?.title}</p>
-                <p className='text-sm sm:text-base text-slate-500 font-semibold'>${item?.price}</p>
+                <p className='text-sm sm:text-base text-slate-500 font-semibold'>₹{item?.price}</p>
             </div>
 
             <div className='flex gap-2 sm:text-lg md:text-xl font-bold'>
