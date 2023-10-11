@@ -16,7 +16,7 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET
 })
 
-
+export const revalidate = 1;
 export async function POST( request ){
 
     try{

@@ -2,6 +2,7 @@ import connectDB from "@/libs/db";
 import deliveryModel from "@/models/deliveryModel";
 import { NextResponse } from "next/server"
 
+export const revalidate = 1;
 export async function PUT(request){
 
     try{

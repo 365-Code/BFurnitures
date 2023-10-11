@@ -10,6 +10,7 @@ const pincodes = {
   
 }
 
+export const revalidate = 1;
 export async function GET( req ) {
 
     try{

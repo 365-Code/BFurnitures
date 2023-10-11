@@ -3,7 +3,7 @@ import deliveryModel from "@/models/deliveryModel";
 import userModel from "@/models/userModel";
 import { NextResponse } from "next/server";
 
-
+export const revalidate = 100;
 export async function GET(request){
 
     try{

@@ -21,12 +21,16 @@ const productSchema = new mongoose.Schema({
         required: true
     },
     width: {
-        type: Number,
-        required: true
+        type: Number
     },
     height: {
-        type: Number,
-        required: true
+        type: Number
+    },
+    length: {
+        type: Number
+    },
+    diameter: {
+        type: Number
     },
     price: {
         type: Number,

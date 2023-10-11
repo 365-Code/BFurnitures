@@ -4,6 +4,7 @@ import { NextResponse } from "next/server"
 import bcrypt from 'bcrypt'
 
 
+export const revalidate = 1;
 export async function POST(request){
 
     try{

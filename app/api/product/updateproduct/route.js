@@ -16,7 +16,7 @@ cloudinary.config({
 })
 
 
-
+export const revalidate = 1;
 export async function PUT( request){
 
     try{

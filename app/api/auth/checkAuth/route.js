@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
 import userModel from '@/models/userModel';
 
+export const revalidate = 1;
 export async function GET(request) {
   try {
     const body = await request.headers;

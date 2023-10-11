@@ -2,37 +2,6 @@
 import AdminSideBar from "@/components/AdminSideBar";
 import React, { useEffect, useState } from "react";
 
-
-// export async function getData(){
-
-//   try{
-
-//     connectDB();
-
-//     const u = await userModel.find({}).select("name email");
-
-    
-//     const us = JSON.parse(JSON.stringify(u));
-    
-//     var users = [];
-
-//     for (let index = 0; index < us.length; index++) {
-//       const e = us[index];
-//       const d = await deliveryModel.findOne({uId: e._id}).select("-uId");
-//       const details = {name: e.name, email: e.email, ...(d)};
-//       users = [details, ...users];
-//     }
-    
-//     return {
-//       users
-//     }
-
-//   }catch(err){
-//     console.log(err)
-//     return null
-//   }
-// }
-
 const Page = () => {
 
   // const data = await getData()

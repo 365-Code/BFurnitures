@@ -29,24 +29,25 @@ const Page = () => {
   const [displayProducts, setDisplayProducts] = useState([])
   const cloudRef = useRef();
 
+  const getProducts = async () => {
+    const result = await fetch(`/api/product/getproduct`)
+    const res = await result.json();
+    if(res.success){
+      setProducts(res.products)
+      setDisplayProducts(res.products)
+    }
+  }
+
+  const getCategories = async () => {
+    const result = await fetch(`/api/category/getcategory`)
+    const res = await result.json();
+    if(res.success){
+      setCategories(res.categories)
+    }
+  }
+
 
   useEffect(() => {
-    const getProducts = async () => {
-        const result = await fetch(`/api/product/getproduct`)
-        const res = await result.json();
-        if(res.success){
-          setProducts(res.products)
-          setDisplayProducts(res.products)
-        }
-    }
-
-    const getCategories = async () => {
-      const result = await fetch(`/api/category/getcategory`)
-      const res = await result.json();
-      if(res.success){
-        setCategories(res.categories)
-      }
-  }
 
     getProducts()
     getCategories()
@@ -97,18 +98,6 @@ const Page = () => {
   }
 
   const handleUpdate = async () => {
-
-    // const formData = new FormData();
-
-    // formData.append('title', product.title)
-    // formData.append('description', product.description)
-    // formData.append('image', product.image)
-    // formData.append('price', product.price)
-    // formData.append('width', product.width)
-    // formData.append('height', product.height)
-    // formData.append('category', product.category)
-    // formData.append('tag', product.tag)
-    // formData.append('stock', product.stock)
 
     if (updStatus.tag == "add") {
       const result = await fetch(`/api/product/addproduct`, {

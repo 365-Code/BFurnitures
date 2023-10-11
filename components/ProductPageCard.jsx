@@ -94,17 +94,49 @@ const ProductPageCard = ({ slug }) => {
                 <p className="description font-semibold">{item?.description}</p>
 
                 <div className="grid grid-flow-col items-center gap-2">
-                  <div className="flex h-full justify-between border border-slate-500 px-2 py-1 font-semibold">
-                    <div className="mx-auto">
-                      <p className="text-xs uppercase text-slate-400">Height</p>
-                      <p className="font-bold">{unit == "cm" ? item?.height * (2.5) : item?.height } {unit}</p>
-                    </div>
-                    <hr className="h-full w-[1px] bg-slate-400" />
-                    <div className="mx-auto">
-                      <p className="text-xs uppercase text-slate-400">Width</p>
-                      <p className="font-bold"> {unit == "cm" ? item?.width * (2.5) : item?.width} {unit}</p>
-                    </div>
-                  </div>
+                    {
+                      <div className="flex h-full justify-between border border-slate-500 px-2 py-1 font-semibold">
+                          {
+                            item?.height &&
+                            <>
+                              <div className="mx-auto">
+                                <p className="text-xs uppercase text-slate-400">Height</p>
+                                <p className="font-bold">{unit == "cm" ? item?.height * (2.5) : item?.height } {unit}</p>
+                              </div>
+                            </>
+                          }
+                        {
+                          item?.width &&
+                          <>
+                            <hr className="h-full w-[1px] bg-slate-400" />
+                            <div className="mx-auto">
+                              <p className="text-xs uppercase text-slate-400">Width</p>
+                              <p className="font-bold"> {unit == "cm" ? item?.width * (2.5) : item?.width} {unit}</p>
+                            </div>
+                          </>
+                        }
+                        {
+                          item?.length &&
+                          <>
+                            <hr className="h-full w-[1px] bg-slate-400" />
+                            <div className="mx-auto">
+                              <p className="text-xs uppercase text-slate-400">Length</p>
+                              <p className="font-bold"> {unit == "cm" ? item?.length * (2.5) : item?.width} {unit}</p>
+                            </div>
+                          </>
+                        }
+                        {
+                          item?.diameter &&
+                          <>
+                            <hr className="h-full w-[1px] bg-slate-400" />
+                            <div className="mx-auto">
+                              <p className="text-xs uppercase text-slate-400">Diameter</p>
+                              <p className="font-bold"> {unit == "cm" ? item?.diameter * (2.5) : item?.width} {unit}</p>
+                            </div>
+                          </>
+                        }
+                      </div>
+                    }
                   <div>
                     <p
                       onClick={() => { setUnit(unit == "cm" ? "in" : "cm") }}

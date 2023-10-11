@@ -4,7 +4,7 @@ import { NextResponse } from "next/server"
 
 
 
-
+export const revalidate = 1;
 export async function PUT(request){
     const {searchParams} = new URL(request.url)
     const uId = searchParams.get('uId')
