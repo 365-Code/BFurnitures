@@ -19,6 +19,7 @@ export async function GET( request ){
     const lmt = 19;
     const pages = ( (page-1) >=0 ? (page-1)*lmt : 0 )
     let msg = "";
+    let total = 0;
     // if(category){
     //     products = await productModel.find({category}).sort({updatedAt: -1}).skip((page-1)*lmt).limit(lmt);
     // } else{
@@ -38,6 +39,18 @@ export async function GET( request ){
         ]
      }).sort({updatedAt: -1}).skip(pages).limit(lmt)
 
+
+    total = await productModel.find({
+        $or: [
+            {
+                $and: [
+                    {category : ctg},
+                    {slug : {$regex : search , $options: "i"}}
+                ]
+            }
+        ]
+     }).sort({updatedAt: -1}).count()
+
      if(!products.length){
          products = await productModel.find({
             $and:[
@@ -49,10 +62,18 @@ export async function GET( request ){
                 }
             ]
             }).sort({updatedAt: -1}).skip(pages).limit(lmt)
+
+        total = await productModel.find({
+            $and:[
+                {
+                    slug : {$regex : search , $options: "xi"}
+                },
+                {
+                    slug: {$regex : ctg , $options: "xi"}
+                }
+            ]
+            }).sort({updatedAt: -1}).count()
         }
-
-
-    const total = await productModel.find({}).count();
 
 
 

@@ -100,9 +100,9 @@ const Header = () => {
             <h1 className='logo font-semibold tracking-widest text-lg'>BFurnitures</h1>
           </Link>
         </div>
-        <div className={`transition-all ${menu.mode == "visible" && " z-[1] w-[80vw] h-screen bg-white/30 backdrop-blur-sm"} w-[100px] h-5 sm:${()=>handleMenu} p-4 absolute sm:p-0 top-0 left-0 sm:w-auto sm:h-full sm:left-0 sm:top-0 sm:relative`}>
+        <div className={`transition-all ${menu?.mode == "visible" && " z-[1] w-full h-screen bg-white/80 backdrop-blur-sm"} w-[100px] h-5 sm:${()=>handleMenu} py-4 px-2 absolute sm:p-0 top-0 left-0 sm:w-auto sm:h-full sm:left-0 sm:top-0 sm:relative`}>
           <button 
-          className='sm:hidden block'
+          className='sm:hidden px-2 block'
           onClick={handleMenu} 
           >
             {
@@ -114,12 +114,12 @@ const Header = () => {
             }
           </button>
           <nav
-            className={`${menu.position} top-12 gap-2 sm:gap-0 sm:translate-x-0 sm:top-0 transition-all flex flex-col absolute flex-wrap items-start sm:items-center gap-x-4 text-base sm:flex md:ml-auto md:mr-auto sm:relative sm:flex-row`}>
-            <Link onClick={()=>handleMenu("hide")} href={'/beds'} className=" mr-5 text-sm font-semibold hover:text-gray-900 uppercase">Beds</Link>
-            <Link onClick={()=>handleMenu("hide")} href={'/sofas'} className="mr-5 text-sm font-semibold hover:text-gray-900 uppercase">Sofas</Link>
-            <Link onClick={()=>handleMenu("hide")} href={'/tables'} className="mr-5 text-sm font-semibold hover:text-gray-900 uppercase">Tables</Link>
-            <Link onClick={()=>handleMenu("hide")} href={'/decors'} className="mr-5 text-sm font-semibold hover:text-gray-900 uppercase">Decoratives</Link>
-            <Link onClick={()=>handleMenu("hide")} href={'/search'} className="mr-5 text-sm font-semibold hover:text-gray-900 uppercase">Categories</Link>
+            className={`${menu.position} py-2 sm:py-0 gap-2 sm:gap-0 sm:translate-x-0 transition-all flex flex-col absolute flex-wrap items-start sm:items-center gap-x-4 text-base sm:top-0 sm:left-0 sm:flex md:ml-auto md:mr-auto sm:relative sm:flex-row`}>
+            <Link onClick={()=>handleMenu("hide")} href={'/beds'} className={`px-2 py-1 sm:p-0 mr-5 text-sm font-semibold hover:text-gray-900 uppercase`}>Beds</Link>
+            <Link onClick={()=>handleMenu("hide")} href={'/sofas'} className={`px-2 py-1 sm:p-0 mr-5 text-sm font-semibold hover:text-gray-900 uppercase`}>Sofas</Link>
+            <Link onClick={()=>handleMenu("hide")} href={'/tables'} className={`px-2 py-1 sm:p-0 mr-5 text-sm font-semibold hover:text-gray-900 uppercase`}>Tables</Link>
+            <Link onClick={()=>handleMenu("hide")} href={'/decors'} className={`px-2 py-1 sm:p-0 mr-5 text-sm font-semibold hover:text-gray-900 uppercase`}>Decoratives</Link>
+            <Link onClick={()=>handleMenu("hide")} href={'/search'} className={`px-2 py-1 sm:p-0 mr-5 text-sm font-semibold hover:text-gray-900 uppercase`}>Categories</Link>
           </nav>
         </div>
         <div className='flex items-center gap-2'>
