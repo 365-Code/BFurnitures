@@ -112,6 +112,7 @@ const Header = () => {
               <MdClose size={"1.6em"}/>
             }
           </button>
+
           <nav
             className={`${menu.position} py-2 sm:py-0 gap-2 sm:gap-0 sm:translate-x-0 transition-all flex flex-col absolute flex-wrap items-start sm:items-center gap-x-4 text-base sm:top-0 sm:left-0 sm:flex md:ml-auto md:mr-auto sm:relative sm:flex-row`}>
             <Link onClick={()=>handleMenu("hide")} href={'/beds'} className={`px-2 py-1 sm:p-0 mr-5 text-sm font-semibold hover:text-gray-900 uppercase`}>Beds</Link>
@@ -121,51 +122,54 @@ const Header = () => {
             <Link onClick={()=>handleMenu("hide")} href={'/search'} className={`px-2 py-1 sm:p-0 mr-5 text-sm font-semibold hover:text-gray-900 uppercase`}>Categories</Link>
           </nav>
         </div>
+
         <div className='flex items-center gap-2'>
-          
-        <button >
-                <FaSun className='text-[#ff5a19]'/>
-                {/* <FaMoon className='text-[#191922]'/> */}
-            </button>
+
+          <button className='mt-4 md:mt-0'>
+              <FaSun className='text-[#ff5a19]'/>
+              {/* <FaMoon className='text-[#191922]'/> */}
+          </button>
+
           {
             auth?.token
-              ?
-              <div
-                className="gap-1 items-center border-0 p-2 focus:outline-none hover:text-slate-400 rounded text-base mt-4 md:mt-0">
+            ?
+            <div
+              className="gap-1 items-center border-0 p-2 focus:outline-none hover:text-slate-400 rounded text-base mt-4 md:mt-0">
 
-                <div className="relative">
-                  <button
-                    onMouseEnter={() => (setDropDown(''))}
-                    onMouseLeave={() => (setDropDown('h-0'))}
-                    className="flex  py-1 px-2 rounded-md hover:bg-blue-600 bg-blue-500 text-slate-50 font-semibold">
-                    <MdAccountCircle size={"1.4em"} />
-                  </button>
+              <div className="relative">
+                <button
+                  onMouseEnter={() => (setDropDown(''))}
+                  onMouseLeave={() => (setDropDown('h-0'))}
+                  className="flex  py-1 px-2 rounded-md hover:bg-blue-600 bg-blue-500 text-slate-50 font-semibold">
+                  <MdAccountCircle size={"1.4em"} />
+                </button>
 
-                  <div
-                    onMouseEnter={() => (setDropDown(''))}
-                    onMouseLeave={() => (setDropDown('h-0'))}
-                    className={`flex ${dropdown} transition-all translate-x-0 flex-col absolute right-0 bg-slate-200 min-w-[160px] rounded-md overflow-hidden `}>
-                    <Link href={'/profile'} onClick={()=> (setDropDown('h-0'))} className="w-full text-left px-2 py-3 border-b hover:bg-slate-300 border-b-slate-300 text-slate-500 font-semibold text-sm"> <span className='flex gap-2 items-center'><MdManageAccounts /> My Account</span></Link>
-                    <Link href={'/orders'} onClick={()=> (setDropDown('h-0'))} className="w-full text-left px-2 py-3 border-b hover:bg-slate-300 border-b-slate-300 text-slate-500 font-semibold text-sm"> <span className='flex gap-2 items-center'><FaBoxes /> My Orders</span></Link>
-                    <Link href={'/wishlist'} onClick={()=> (setDropDown('h-0'))} className="w-full text-left px-2 py-3 border-b hover:bg-slate-300 border-b-slate-300 text-slate-500 font-semibold text-sm"> <span className='flex gap-2 items-center'><BiSolidHeart /> My Wishlist</span></Link>
-                    <button onClick={handleLogOut} className="w-full text-left px-2 py-3 border-b hover:bg-slate-300 border-b-slate-300 text-slate-500 font-semibold text-sm"> <span className='flex gap-2 items-center'><MdLogout /> Logout</span></button>
-                  </div>
-
+                <div
+                  onMouseEnter={() => (setDropDown(''))}
+                  onMouseLeave={() => (setDropDown('h-0'))}
+                  className={`flex ${dropdown} transition-all translate-x-0 flex-col absolute right-0 bg-slate-200 min-w-[160px] rounded-md overflow-hidden `}>
+                  <Link href={'/profile'} onClick={()=> (setDropDown('h-0'))} className="w-full text-left px-2 py-3 border-b hover:bg-slate-300 border-b-slate-300 text-slate-500 font-semibold text-sm"> <span className='flex gap-2 items-center'><MdManageAccounts /> My Account</span></Link>
+                  <Link href={'/orders'} onClick={()=> (setDropDown('h-0'))} className="w-full text-left px-2 py-3 border-b hover:bg-slate-300 border-b-slate-300 text-slate-500 font-semibold text-sm"> <span className='flex gap-2 items-center'><FaBoxes /> My Orders</span></Link>
+                  <Link href={'/wishlist'} onClick={()=> (setDropDown('h-0'))} className="w-full text-left px-2 py-3 border-b hover:bg-slate-300 border-b-slate-300 text-slate-500 font-semibold text-sm"> <span className='flex gap-2 items-center'><BiSolidHeart /> My Wishlist</span></Link>
+                  <button onClick={handleLogOut} className="w-full text-left px-2 py-3 border-b hover:bg-slate-300 border-b-slate-300 text-slate-500 font-semibold text-sm"> <span className='flex gap-2 items-center'><MdLogout /> Logout</span></button>
                 </div>
 
               </div>
-              :
-              <Link href={'/login'}
-                className="gap-1 py-1 px-4 bg-slate-900 text-slate-50 rounded-lg focus:outline-none mt-4 md:mt-0">
-                Login
-              </Link>
-            }
+
+            </div>
+            :
+            <Link href={'/login'}
+              className="gap-1 py-1 px-4 bg-slate-900 text-slate-50 rounded-lg focus:outline-none mt-4 md:mt-0">
+              Login
+            </Link>
+          }
 
           <button
             className="gap-1 items-center bg-gray-100 border-0 p-2 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
             onClick={toggleCart}>
             <BiSolidCartAlt className='text-xl font-semibold' />
           </button>
+
         </div>
 
       </div>
