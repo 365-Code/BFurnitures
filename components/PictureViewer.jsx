@@ -14,7 +14,7 @@ const PictureViewer = ({ img, setPreview }) => {
                     alt="" />
                 <button 
                 onClick={()=>setPreview(false)}
-                className="absolute text-slate-50 right-[3%] top-[3%] hover:bg-slate-50 hover:text-slate-700 cursor-pointer rounded-full border p-2">
+                className="absolute  right-[3%] top-[3%] hover:bg-slate-700 hover:text-slate-50 text-slate-700 cursor-pointer rounded-full border p-2">
                     <MdClose/>
                 </button>
 

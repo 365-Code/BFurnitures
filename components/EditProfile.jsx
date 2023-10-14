@@ -65,7 +65,7 @@ const EditProfile = ({userDet, setUserDet, setVisible}) => {
       <div className="w-[600px] max-w-[90%] relative min-h-[500px] bg-slate-50 rounded-lg mx-auto overflow-hidden flex flex-col sm:flex-row">
 
         <button 
-        className='border z-[1] absolute right-3 top-3 text-slate-800 p-1 rounded-full hover:bg-slate-200'
+        className='border z-[1] absolute right-3 top-3 hover:bg-slate-700 hover:text-slate-200 text-slate-800 p-1 rounded-full'
         onClick={()=>(setVisible("editModeOff"))}><MdClose size={"1.2em"}/></button>
 
         <div className="basis-[35%] bg-slate-50 h-full">
