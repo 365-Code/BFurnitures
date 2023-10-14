@@ -122,7 +122,8 @@ export const light = {
     textColor : "text-slate-400",
     headingColor : "text-slate-800",
     bgColor1 : "bg-[#f4f4f4]",
-    bgColor2 : "bg-[#f6f6f6]"
+    bgColor3 : "bg-[#f6f6f6]",
+    bgColor2 : "bg-[#D8D9DA]"
 }
 
 export const dark = {
@@ -133,4 +134,5 @@ export const dark = {
     bgColor2 : "bg-[#191922]"
 }
 
-export const theme = light
+// export const theme = light
+// export let theme = dark

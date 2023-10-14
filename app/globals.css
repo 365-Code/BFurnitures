@@ -26,7 +26,7 @@ body{
 
 h1,h2,h3,h4,h5,h6{
   font-family: var(--primary-font);
-  @apply text-slate-800
+  @apply text-slate-800 
 }
 
 p,input,textarea,a, button, select, option{
@@ -71,10 +71,6 @@ hr{
 .no-scrollbar::-webkit-scrollbar{
   width: 0;
 }
-
-/* .my-container{
-  @apply py-4 px-6 sm:px-8 md:px-10
-} */
 
 .logo{
   font-family: var(--header-font);

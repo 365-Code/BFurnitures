@@ -37,12 +37,6 @@ const Page = async () => {
 
   const {featured, trending} = items
 
-  // if(!items){
-  //   return null
-  // }
-
-  // const {featured, trending} = items
-
   return (
     <div className='w-full py-10 px-6 space-y-12'>
       <div className="bg-[#D8D9DA] flex flex-col-reverse md:flex-row justify-between">

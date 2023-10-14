@@ -5,12 +5,11 @@ import React, { useEffect, useRef, useState } from 'react'
 import { BiSolidCartAlt, BiSolidHeart } from 'react-icons/bi'
 import SideCart from './SideCart'
 import { MdAccountCircle, MdManageAccounts, MdLogout, MdMenu, MdClose } from 'react-icons/md'
-import { FaBoxes } from 'react-icons/fa'
+import { FaBoxes, FaSun, FaMoon } from 'react-icons/fa'
 import { useAuth } from '@/context/AuthState'
 import { usePathname, useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 import { toastOptions } from '@/utils/utils'
-
 
 const Header = () => {
 
@@ -87,7 +86,7 @@ const Header = () => {
     <header id='hdr'
       className="text-gray-600 relative body-font items-center w-full border bg-[#E7E7E7] ">
 
-     <div className='relative h-[127px] sm:h-[147px] md:h-[67px] bg-[#E7E7E7]' />
+     <div className='relative h-[137px] sm:h-[147px] md:h-[67px] bg-[#E7E7E7]' />
 
       <div id='navbar'
         className="top-0 left-0 z-10 bg-white/30 backdrop-blur-sm w-full fixed flex flex-wrap justify-between flex-col px-6 py-4 md:flex-row items-center" //flex-wrap flex-col
@@ -123,6 +122,11 @@ const Header = () => {
           </nav>
         </div>
         <div className='flex items-center gap-2'>
+          
+        <button >
+                <FaSun className='text-[#ff5a19]'/>
+                {/* <FaMoon className='text-[#191922]'/> */}
+            </button>
           {
             auth?.token
               ?
@@ -155,7 +159,7 @@ const Header = () => {
                 className="gap-1 py-1 px-4 bg-slate-900 text-slate-50 rounded-lg focus:outline-none mt-4 md:mt-0">
                 Login
               </Link>
-          }
+            }
 
           <button
             className="gap-1 items-center bg-gray-100 border-0 p-2 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
