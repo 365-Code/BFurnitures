@@ -1,17 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:ital,wght@0,300;0,500;0,600;0,700;1,400&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:ital,wght@0,300;0,500;0,600;0,700;1,400&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Kanit&family=Montserrat:wght@300;400;500;600;700&family=Poppins:ital,wght@0,300;0,500;0,600;0,700;1,400&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@font-face{
-  font-family: 'Headache';
-  src: url('../public/Headache.otf') format('otf')
-}
-
 :root{
   --primary-font : 'Poppins', sans-serif;
   --secondary-font : 'Montserrat', sans-serif;
+  --header-font : 'Dancing Script', cursive;
+/* font-family: 'Kanit', sans-serif; */
 }
 
 *{
@@ -79,7 +77,8 @@ hr{
 } */
 
 .logo{
-  font-family: Headache;
+  font-family: var(--header-font);
+  @apply text-3xl;
 }
 
 .paymentMethod-active{

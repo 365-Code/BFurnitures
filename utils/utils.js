@@ -115,3 +115,22 @@ export const toastOptions = {
     hideProgressBar: true,
     theme: "light"
 }
+
+
+export const light = {
+    name: "light",
+    textColor : "text-slate-400",
+    headingColor : "text-slate-800",
+    bgColor1 : "bg-[#f4f4f4]",
+    bgColor2 : "bg-[#f6f6f6]"
+}
+
+export const dark = {
+    name: "dark",
+    textColor : "text-slate-200",
+    headingColor : "text-slate-400",
+    bgColor1 : "bg-[#15141b]",
+    bgColor2 : "bg-[#191922]"
+}
+
+export const theme = light
