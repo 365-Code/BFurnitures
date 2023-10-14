@@ -254,7 +254,7 @@ const Page = () => {
             <div className="flex sm:flex-row flex-col rounded-lg max-w-[800px] bg-[#f5f6f5] h-fit p-8 gap-4">
               <button
                 onClick={() => showProduct()}
-                className="absolute text-slate-50 right-[3%] top-[3%] hover:bg-slate-50 hover:text-slate-700 cursor-pointer rounded-full border p-2">
+                className="absolute right-[3%] top-[3%] hover:text-slate-200 hover:bg-slate-700 text-slate-700 cursor-pointer rounded-full border border-slate-700 p-2">
                 <MdClose />
               </button>
 
