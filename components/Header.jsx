@@ -87,7 +87,7 @@ const Header = () => {
     <header id='hdr'
       className="text-gray-600 relative body-font items-center w-full border bg-[#E7E7E7] ">
 
-     <div className='relative h-[138px] sm:h-[158px] md:h-[78px] bg-[#E7E7E7]' />
+     <div className='relative h-[127px] sm:h-[147px] md:h-[67px] bg-[#E7E7E7]' />
 
       <div id='navbar'
         className="top-0 left-0 z-10 bg-white/30 backdrop-blur-sm w-full fixed flex flex-wrap justify-between flex-col px-6 py-4 md:flex-row items-center" //flex-wrap flex-col

@@ -128,16 +128,17 @@ const Page = () => {
 
   return (
 
+      <>
     <div className="flex sm:flex-row flex-col">
 
-    <div className={`${showFilter ? "h-0" : 'min-h-[10px]'} max-h-[50px] transition-all w-full overflow-hidden ease-in-out sm:hidden px-4 text-center`}>
-      <button onClick={handleFilter} className=" transition-all bg-blue-500 hover:bg-blue-600 flex gap-2 justify-center items-center w-full py-2 rounded-lg text-lg text-slate-200 font-semibold">
-        Filter
-        <FaFilter/>
-      </button>
-    </div>
+      <div className={`${showFilter ? "h-0" : 'min-h-[10px]'} max-h-[50px] transition-all w-full overflow-hidden ease-in-out sm:hidden px-4 text-center`}>
+        <button onClick={handleFilter} className=" transition-all bg-blue-500 hover:bg-blue-600 flex gap-2 justify-center items-center w-full py-2 rounded-lg text-lg text-slate-200 font-semibold">
+          Filter
+          <FaFilter/>
+        </button>
+      </div>
 
-      <div className={`${showFilter ? "min-h-[10px] h-full" : 'h-0'} transition-all sm:h-full ease-in-out px-5 py-0 overflow-hidden sm:overflow-visible sm:block sm:basis-[30%] md:basis-[25%] sm:p-5 space-y-4 bg-white/30 `}>
+      <div className={`${showFilter ? "min-h-[10px] h-full" : 'h-0'} transition-all sm:h-full ease-in-out px-5 py-0 overflow-hidden sm:overflow-visible sm:block sm:basis-[30%] md:basis-[25%] sm:p-5 space-y-2 bg-white/30 `}>
         <h1 className="transition-all font-semibold text-xl text-slate-900">Categories</h1>
         <div className="transition-all flex flex-col gap-1">
 
@@ -187,7 +188,7 @@ const Page = () => {
         </div>
 
 
-        <div className=" h-[80vh] no-scrollbar overflow-y-scroll w-full grid gap-4 max-[570px]:grid-cols-1 max-[639px]:grid-cols-2 md:grid-cols-2 min-[1000px]:grid-cols-3 justify-items-center">
+        <div className="max-h-[70vh] no-scrollbar overflow-y-scroll w-full grid gap-4 max-[570px]:grid-cols-1 max-[639px]:grid-cols-2 md:grid-cols-2 min-[1000px]:grid-cols-3 justify-items-center">
           {
             products?.map((item, index) => {
               return (
@@ -201,13 +202,17 @@ const Page = () => {
           }
         </div>
 
-          { loading
-          ? <Loader/>
+          { 
+          loading
+          ? 
+          <div className='flex justify-center'>
+            <Loader/>
+          </div>
           : (
             hasMore &&
             <button 
             onClick={()=>{setPage(page+1)}}
-            className='p-2 bg-slate-400 border rounded-sm text-slate-200 mx-auto flex gap-2 hover:bg-slate-600  items-center'> 
+            className='p-2 bg-slate-400 border px-8 rounded-lg text-slate-200 mx-auto flex gap-2 hover:bg-slate-500  items-center'> 
             Load More <BiSolidDownArrow/>
             </button>
           )
@@ -215,7 +220,10 @@ const Page = () => {
           }
       </div>
 
+
     </div>
+      <hr />
+    </>
   )
 }
 

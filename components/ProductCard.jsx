@@ -35,7 +35,8 @@ const ProductCard = ({item}) => {
     }, [])
 
   return (
-    <div className='custom-shadow mb-8 border rounded-t-lg overflow-hidden flex flex-col justify-between max-w-full max-h-[440px]
+    <div className='custom-shadow mb-8 border rounded-t-lg overflow-hidden flex flex-col justify-between 
+                    max-w-full max-h-[380px]
                     w-[300px] min-h-[350px]
                     sm:w-[300px] sm:min-h-[350px]'>
             <Link href={`/products/${item?.slug}`} >
