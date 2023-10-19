@@ -6,7 +6,7 @@ const Page = () => {
   <div className="rounded-lg border border-gray-500 p-4">
     <h1 className="text-center text-2xl tracking-wide">Contact Us</h1>
     <hr className="mx-auto mt-4 w-[10%]" />
-    <p className="text-center text-slate-500">Have a question, need assistance? We're just a message away!</p>
+    <p className="text-center text-slate-500">Have a question, need assistance? We&apos;re just a message away!</p>
 
     <div>
       <div className="flex w-full items-center justify-between py-2">
