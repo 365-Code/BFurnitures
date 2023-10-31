@@ -221,11 +221,10 @@ const Page = () => {
 
       </div>
 
-      <div className='flex flex-col gap-4 p-2 w-1/2 custom-scrollbar max-h-[300px] overflow-y-scroll overflow-x-hidden'>
+      <div className='flex flex-col gap-4 p-2 w-full custom-scrollbar max-h-[300px] overflow-y-scroll overflow-x-hidden'>
         {
 
           cart?.map((item) => (<CartCard key={item._id} item={item} description={item.description} />))
-
         }
 
       </div>

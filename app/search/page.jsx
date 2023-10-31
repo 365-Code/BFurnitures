@@ -132,7 +132,7 @@ const Page = () => {
     <div className="flex sm:flex-row flex-col">
 
       <div className={`${showFilter ? "h-0" : 'min-h-[10px]'} max-h-[50px] transition-all w-full overflow-hidden ease-in-out sm:hidden px-4 text-center`}>
-        <button onClick={handleFilter} className=" transition-all bg-blue-500 hover:bg-blue-600 flex gap-2 justify-center items-center w-full py-2 rounded-lg text-lg text-slate-200 font-semibold">
+        <button onClick={handleFilter} className=" transition-all bg-slate-600 hover:bg-slate-700 flex gap-2 justify-center items-center w-full py-2 rounded-lg text-lg text-slate-200 font-semibold">
           Filter
           <FaFilter/>
         </button>

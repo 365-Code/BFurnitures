@@ -52,7 +52,7 @@ const CartCard = ({item, description}) => {
     <div
     onMouseEnter={()=>setVisible("visible")}
     onMouseLeave={()=>setVisible("invisible")}
-    className={`${remove} transition-all relative item flex justify-between items-center gap-4 rounded-xl bg-[#ffffff] p-2`}>
+    className={`${remove} transition-all relative item flex justify-between items-center w-full gap-4 rounded-xl bg-[#ffffff] p-2`}>
       <div 
       className="h-[70px] w-[70px] overflow-hidden rounded-full border outline-none">
         <img 
@@ -71,7 +71,7 @@ const CartCard = ({item, description}) => {
       {
         description &&
         <div className='w-2/5'>
-        {`${description.substring(0,55)}...`}
+        {`${description.substring(0,35)}...`}
       </div>
       }
 
